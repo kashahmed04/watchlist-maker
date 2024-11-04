@@ -17,6 +17,10 @@ const handleDomo = (e, onDomoAdded) => {
         return false;
     }
 
+    //onDomoAdded triggers a reload of the updated data we get back from the server in
+    //sendPOST since we say if(handler){
+    //     handler(result);
+    // }**
     helper.sendPost(e.target.action, {name, age, level}, onDomoAdded);
     return false;
 
@@ -56,6 +60,8 @@ const DomoList = (props) => {
         loadDomosFromServer();
     }, [props.reloadDomos]);
 
+    //does this not run like useEffect() after we change the domos data in
+    //the react and just do the condtionals below**
     const handleDelete = async (id) => {
         helper.sendDelete(`/deleteDomo/${id}`, (result) => {
             if(result.message){
