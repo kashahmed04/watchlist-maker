@@ -1,3 +1,4 @@
+// can dynamic react components be adding, deleting, copying to clipboard, profit model, and storing files**
 require('dotenv').config();
 
 const path = require('path');
@@ -15,7 +16,8 @@ const redis = require('redis');
 const router = require('./router.js');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
-const dbURI = process.env.MONGODB_URI || 'mongodb://127.0.0.1/DomoMaker';
+// how would I change this within heroku**
+const dbURI = process.env.MONGODB_URI || 'mongodb://127.0.0.1/WatchlistMaker';
 
 mongoose.connect(dbURI).catch((err) => {
   if (err) {

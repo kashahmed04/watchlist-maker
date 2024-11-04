@@ -6,12 +6,18 @@ const setName = (title) => _.escape(title).trim();
 
 // do we not need data for the dropdown here and that only goes
 // in the HTML right**
-const DomoSchema = new mongoose.Schema({
+const ListSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
     trim: true,
     set: setName,
+  },
+  // do we still need this in the schema even though the dropdown already
+  // is a string (have it setup in maker.JSX and list.js  in controllers)**
+  status: {
+    type: String,
+    required: true,
   },
   owner: {
     type: mongoose.Schema.ObjectId,
@@ -24,9 +30,10 @@ const DomoSchema = new mongoose.Schema({
   },
 });
 
-DomoSchema.statics.toAPI = (doc) => ({
+ListSchema.statics.toAPI = (doc) => ({
   title: doc.title,
+  status: doc.status,
 });
 
-const DomoModel = mongoose.model('Domo', DomoSchema);
-module.exports = DomoModel;
+const ListModel = mongoose.model('List', ListSchema);
+module.exports = ListModel;

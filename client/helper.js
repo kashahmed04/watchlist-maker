@@ -4,7 +4,10 @@ const handleError = (message) => {
     document.getElementById('domoMessage').classList.remove('hidden');
 };
 
-//what is the default value of handler if we do not pass anything in**
+//is it ok for title to have numbers as well since some titles have numbers in it
+//and ony show error when the value is not filled in at all (blank)**
+
+//what is the default value of handler if we do not pass anything in (undefined)
 //when we pass the data into the server where does it go first (does it go to
 //router since we target the action)(goes to router)
 //since we made the method POST it knows to go to the POST version
