@@ -1,4 +1,5 @@
-// can dynamic react components be adding, deleting, copying to clipboard, profit model, and storing files**
+// can dynamic react components be adding,
+// deleting, copying to clipboard, profit model, and storing files**
 require('dotenv').config();
 
 const path = require('path');

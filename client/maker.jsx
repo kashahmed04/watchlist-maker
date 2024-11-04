@@ -4,7 +4,7 @@ const React = require('react');
 const { useState, useEffect } = React;
 const { createRoot } = require('react-dom/client');
 
-const handleDomo = (e, onDomoAdded) => {
+const handleList = (e, onItemAdded) => {
     e.preventDefault();
     helper.hideError();
 
@@ -16,17 +16,17 @@ const handleDomo = (e, onDomoAdded) => {
         return false;
     }
 
-    helper.sendPost(e.target.action, {title, status}, onDomoAdded);
+    helper.sendPost(e.target.action, {title, status}, onItemAdded);
     return false;
 
 };
 
 // will the dropdown always show a  value by default and prevent this field 
 // from being empty so i dont have to do any error checking server side and it's ok here**
-const DomoForm = (props) => {
+const ListForm = (props) => {
     return(
         <form id="domoForm"
-            onSubmit={(e) => handleDomo(e, props.triggerReload)}
+            onSubmit={(e) => handleList(e, props.triggerReload)}
             name="domoForm"
             action="/maker"
             method="POST"
@@ -47,22 +47,22 @@ const DomoForm = (props) => {
     );
 };
 
-const DomoList = (props) => {
-    const [domos, setDomos] = useState(props.domos);
+const WatchlistData = (props) => {
+    const [items, setList] = useState(props.items);
 
     useEffect(() => {
-        const loadDomosFromServer = async () => {
+        const loadItemsFromServer = async () => {
             const response = await fetch('/getList');
             const data = await response.json();
-            setDomos(data.domos);
+            setList(data.items);
         };
-        loadDomosFromServer();
-    }, [props.reloadDomos]);
+        loadItemsFromServer();
+    }, [props.reloadItems]);
 
     const handleDelete = async (id) => {
         helper.sendDelete(`/deleteDomo/${id}`, (result) => {
             if(result.message){
-                setDomos(domos.filter((domo) => domo._id !== id));
+                setList(items.filter((item) => item._id !== id));
             }
         });
     }
@@ -72,15 +72,15 @@ const DomoList = (props) => {
    //can see the updates**
    //are we allows to have console.log() for errors or no**
     const copyToClipboard = async () => {
-        if (domos.length === 0) {
+        if (items.length === 0) {
             alert("No Domos to copy!"); // Alert if no Domos
             return; 
         }
 
-        const domoText = domos.map(domo => `Title: ${domo.title}, Status: ${domo.status}`).join('\n');
+        const listText = items.map(item => `Title: ${item.title}, Status: ${item.status}`).join('\n');
 
         try {
-            await navigator.clipboard.writeText(domoText);
+            await navigator.clipboard.writeText(listText);
             alert("Domo list copied to clipboard!"); // Alert on successful copy
         } catch (err) {
             console.error("Failed to copy: ", err); // Log errors to console
@@ -88,20 +88,20 @@ const DomoList = (props) => {
         }
     };
 
-    if(domos.length === 0){
+    if(items.length === 0){
         return(
             <div className="domoList">
-                <h3 className="emptyDomo">No Domos Yet!</h3>
+                <h3 className="emptyDomo">No Items Yet!</h3>
             </div>
         );
     }
-    const domoNodes = domos.map(domo => {
+    const itemNodes = items.map(item => {
         return(
-            <div key={domo.id} className="domo">
+            <div key={item.id} className="domo">
                 <img src="assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
-                <h3 className="domoName">Title: {domo.title}</h3>
-                <h4 className="domoStatus">Status: {domo.status}</h4> 
-                <button onClick={() => handleDelete(domo._id)}>Delete</button>
+                <h3 className="domoName">Title: {item.title}</h3>
+                <h4 className="domoStatus">Status: {item.status}</h4> 
+                <button onClick={() => handleDelete(item._id)}>Delete</button>
             </div>
         );
     });
@@ -109,22 +109,22 @@ const DomoList = (props) => {
         <div className="domoList">
             <button onClick={copyToClipboard}>Copy List to Clipboard</button> 
             <div>
-                {domoNodes}
+                {itemNodes}
             </div>
         </div>
     );
 };
 
 const App = () => {
-    const [reloadDomos, setReloadDomos] = useState(false);
+    const [reloadItems, setReloadItems] = useState(false);
 
     return(
         <div>
             <div id="makeDomo">
-                <DomoForm triggerReload={() => setReloadDomos(!reloadDomos)} />
+                <ListForm triggerReload={() => setReloadItems(!reloadItems)} />
             </div>
             <div id="domos">
-                <DomoList domos={[]} reloadDomos={reloadDomos} />
+                <WatchlistData items={[]} reloadItems={reloadItems} />
             </div>
         </div>
     );
