@@ -7,7 +7,7 @@ const makerPage = (req, res) => res.render('app');
 const getDomos = async (req, res) => {
   try {
     const query = { owner: req.session.account._id };
-    const docs = await Domo.find(query).select('name age level').lean().exec();
+    const docs = await Domo.find(query).select('name').lean().exec();
 
     return res.json({ domos: docs });
   } catch (err) {
@@ -16,14 +16,14 @@ const getDomos = async (req, res) => {
   }
 };
 
+// would we handle name here and dropdown or can dropdown be in the HTML
+// as required and we only handle name here**
 const makeDomo = async (req, res) => {
-  if (!req.body.name || !req.body.age || !req.body.level) {
-    return res.status(400).json({ error: 'Name, age, and level are required!' });
+  if (!req.body.title) {
+    return res.status(400).json({ error: 'Title is required!' });
   }
   const domoData = {
-    name: req.body.name,
-    age: req.body.age,
-    level: req.body.level,
+    title: req.body.title,
     owner: req.session.account._id,
   };
 
@@ -40,7 +40,6 @@ const makeDomo = async (req, res) => {
     return res.status(500).json({ error: 'An error occured making domo!' });
   }
 };
-
 
 const deleteDomo = async (req, res) => {
   try {

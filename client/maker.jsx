@@ -8,20 +8,14 @@ const handleDomo = (e, onDomoAdded) => {
     e.preventDefault();
     helper.hideError();
 
-    const name = e.target.querySelector('#domoName').value;
-    const age = e.target.querySelector('#domoAge').value;
-    const level = e.target.querySelector('#domoLevel').value;
+    const title = e.target.querySelector('#domoName').value;
 
-    if(!name || !age || !level){
+    if(!title){
         helper.handleError('All fields are required');
         return false;
     }
 
-    //onDomoAdded triggers a reload of the updated data we get back from the server in
-    //sendPOST since we say if(handler){
-    //     handler(result);
-    // }**
-    helper.sendPost(e.target.action, {name, age, level}, onDomoAdded);
+    helper.sendPost(e.target.action, {title}, onDomoAdded);
     return false;
 
 }
@@ -36,12 +30,8 @@ const DomoForm = (props) => {
             className="domoForm"
         >
 
-            <label htmlFor="name">Name: </label>
+            <label htmlFor="name">Title: </label>
             <input id="domoName" type="text" name="name" placeholder="Domo Name" />
-            <label htmlFor="age">Age: </label>
-            <input id="domoAge" type="number" min="0" name="age" />
-            <label htmlFor="level">Level: </label>
-            <input id="domoLevel" type="number" min="0" name="level" />
             <input className="makeDomoSubmit" type="submit" value="Make Domo" />
 
         </form>
@@ -60,8 +50,6 @@ const DomoList = (props) => {
         loadDomosFromServer();
     }, [props.reloadDomos]);
 
-    //does this not run like useEffect() after we change the domos data in
-    //the react and just do the condtionals below**
     const handleDelete = async (id) => {
         helper.sendDelete(`/deleteDomo/${id}`, (result) => {
             if(result.message){
@@ -81,9 +69,7 @@ const DomoList = (props) => {
         return(
             <div key={domo.id} className="domo">
                 <img src="assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
-                <h3 className="domoName">Name: {domo.name}</h3>
-                <h3 className="domoAge">Age: {domo.age}</h3>
-                <h3 className="domoLevel">Level: {domo.level}</h3>
+                <h3 className="domoName">Title: {domo.title}</h3>
                 <button onClick={() => handleDelete(domo._id)}>Delete</button>
             </div>
         );

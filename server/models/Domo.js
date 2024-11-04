@@ -2,24 +2,16 @@ const mongoose = require('mongoose');
 
 const _ = require('underscore');
 
-const setName = (name) => _.escape(name).trim();
+const setName = (title) => _.escape(title).trim();
 
+// do we not need data for the dropdown here and that only goes
+// in the HTML right**
 const DomoSchema = new mongoose.Schema({
-  name: {
+  title: {
     type: String,
     required: true,
     trim: true,
     set: setName,
-  },
-  age: {
-    type: Number,
-    min: 0,
-    required: true,
-  },
-  level: {
-    type: Number,
-    min: 0,
-    required: true,
   },
   owner: {
     type: mongoose.Schema.ObjectId,
@@ -33,9 +25,7 @@ const DomoSchema = new mongoose.Schema({
 });
 
 DomoSchema.statics.toAPI = (doc) => ({
-  name: doc.name,
-  age: doc.age,
-  level: doc.level,
+  title: doc.title,
 });
 
 const DomoModel = mongoose.model('Domo', DomoSchema);

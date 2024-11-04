@@ -6,9 +6,9 @@ const handleError = (message) => {
 
 //what is the default value of handler if we do not pass anything in**
 //when we pass the data into the server where does it go first (does it go to
-//router since we target the action)**
+//router since we target the action)(goes to router)
 //since we made the method POST it knows to go to the POST version
-//of it since we made the method POST right**
+//of it since we made the method POST right (yes)
 const sendPost = async (url, data, handler) => {
     const response = await fetch(url, {
       method: 'POST',
