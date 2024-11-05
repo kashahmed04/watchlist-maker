@@ -33,7 +33,7 @@ const sendPost = async (url, data, handler) => {
       handleError(result.error);
     }
     if(handler){
-        handler(result);
+      handler(result);
     }
 };
 

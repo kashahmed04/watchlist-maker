@@ -57,9 +57,39 @@ const signup = async (req, res) => {
   }
 };
 
+const changePassword = async (req, res) => {
+  const pass = `${req.body.pass}`;
+
+  const pass2 = `${req.body.pass2}`;
+
+  if (!pass || !pass2) {
+      return res.status(400).json({ error: 'All fields are required!' });
+  }
+
+  if (pass !== pass2) {
+      return res.status(400).json({ error: 'Passwords do not match!' });
+  }
+
+  try {
+      //find and update the user's password
+      const user = await Account.findOne({ _id: req.session.account._id });
+      user.password = await Account.generateHash(pass); 
+      await user.save();
+
+      //is this ok instead of returning the status**
+      logout(req, res);
+      //return res.status(200).json({ message: 'Password changed successfully!' });
+  } catch (err) {
+      console.log(err);
+      return res.status(500).json({ error: 'An error occurred while changing password!' });
+  }
+};
+
+
 module.exports = {
   loginPage,
   login,
   logout,
   signup,
+  changePassword,
 };

@@ -9,7 +9,7 @@ const getList = async (req, res) => {
     const query = { owner: req.session.account._id };
     const docs = await List.find(query).select('title status').lean().exec();
 
-    return res.json({ list: docs });
+    return res.json({ items: docs });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: 'Error retrieving watchlist!' });

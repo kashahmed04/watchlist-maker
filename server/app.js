@@ -3,6 +3,9 @@
 // go over code to see if they count for requirements**
 // have uploading photo for the list be optional otherwise show a default image
 // for when we add an item to the list instead of changin profile photo or both**
+// does mongoDB make each collection plural by default (list and account in models.js)**
+// I had a domo and list colection and deleted them in the database so are they deleted in general
+// or how do we know when they are deleted from all accounts in general**
 require('dotenv').config();
 
 const path = require('path');

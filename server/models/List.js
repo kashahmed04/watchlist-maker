@@ -33,5 +33,5 @@ ListSchema.statics.toAPI = (doc) => ({
   status: doc.status,
 });
 
-const ListModel = mongoose.model('List', ListSchema);
+const ListModel = mongoose.model('Item', ListSchema);
 module.exports = ListModel;

@@ -66,7 +66,7 @@ const WatchlistData = (props) => {
             }
         });
     }
-    
+
    //are we allowed to use alert instead of console.log so the user
    //can see the updates**
    //are we allows to have console.log() for errors or no**
@@ -114,6 +114,49 @@ const WatchlistData = (props) => {
    );
 };
 
+const handlePasswordChange = (e) => {
+    e.preventDefault();
+    helper.hideError();
+
+    const pass = e.target.querySelector('#pass').value;
+    const pass2 = e.target.querySelector('#pass2').value;
+
+
+    if(!pass || !pass2){
+        helper.handleError('All fields are required!');
+        return false;
+    }
+
+    if(pass !== pass2){
+        helper.handleError('Passwords do not match!');
+        return false;
+    }
+
+    const response = helper.sendPost(e.target.action, {pass, pass2});
+    
+    return false;
+}
+
+const ChangePasswordWindow = (props) => {
+    return(
+        <form id="changeForm"
+            name="changeForm"
+            onSubmit={handlePasswordChange}
+            action="/changePassword"
+            method="POST"
+            className="changeForm"
+        >
+            <label htmlFor="pass">Password: </label>
+            <input id="pass" type="password" name="pass" placeholder="password" />
+            <label htmlFor="pass">Retype Password: </label>
+            <input id="pass2" type="password" name="pass2" placeholder="retype password" />
+            <input className="formSubmit" type="submit" value="Change Password" />
+
+        </form>
+    );
+};
+
+
 const App = () => {
     const [reloadItems, setReloadItems] = useState(false);
 
@@ -132,6 +175,16 @@ const App = () => {
 const init = () => {
     const root = createRoot(document.getElementById('app'));
     root.render( <App /> )
+
+    const ChangePasswordButton = document.getElementById('changePassword');
+
+    ChangePasswordButton.addEventListener('click', (e) =>{
+        e.preventDefault();
+        root.render( <ChangePasswordWindow />);
+        return false;
+    });
+
+
 }
 
 window.onload = init;

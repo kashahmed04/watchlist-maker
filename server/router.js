@@ -17,6 +17,10 @@ const router = (app) => {
 
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 
+  //is this ok for changing password and put it in account.js for backend then
+  //in maker.JSX have the functionality for the client side**
+  app.post('/changePassword', mid.requiresLogin, controllers.Account.changePassword);
+
   app.delete('/deleteItem/:id', mid.requiresLogin, controllers.List.deleteListItem);
 };
 
