@@ -66,14 +66,13 @@ const WatchlistData = (props) => {
             }
         });
     }
-
-   // Function to copy the list of Domos to clipboard
+    
    //are we allowed to use alert instead of console.log so the user
    //can see the updates**
    //are we allows to have console.log() for errors or no**
     const copyToClipboard = async () => {
         if (items.length === 0) {
-            alert("No Domos to copy!"); // Alert if no Domos
+            alert("No Domos to copy!");
             return; 
         }
 
@@ -81,10 +80,10 @@ const WatchlistData = (props) => {
 
         try {
             await navigator.clipboard.writeText(listText);
-            alert("Domo list copied to clipboard!"); // Alert on successful copy
+            alert("Domo list copied to clipboard!"); 
         } catch (err) {
-            console.error("Failed to copy: ", err); // Log errors to console
-            alert("Failed to copy to clipboard!"); // Alert on failure
+            console.error("Failed to copy: ", err); 
+            alert("Failed to copy to clipboard!"); 
         }
     };
 
@@ -112,7 +111,7 @@ const WatchlistData = (props) => {
                 {itemNodes}
             </div>
         </div>
-    );
+   );
 };
 
 const App = () => {
