@@ -16,7 +16,7 @@ const getList = async (req, res) => {
   }
 };
 
-// would we handle title  here and dropdown or can dropdown be in the HTML
+// would we handle title here and dropdown or can dropdown be in the HTML
 // as required and we only handle title here**
 const makeList = async (req, res) => {
   if (!req.body.title || !req.body.status) {

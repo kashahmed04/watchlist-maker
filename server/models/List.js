@@ -4,8 +4,6 @@ const _ = require('underscore');
 
 const setName = (title) => _.escape(title).trim();
 
-// do we not need data for the dropdown here and that only goes
-// in the HTML right**
 const ListSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -14,7 +12,7 @@ const ListSchema = new mongoose.Schema({
     set: setName,
   },
   // do we still need this in the schema even though the dropdown already
-  // is a string (have it setup in maker.JSX and list.js  in controllers)**
+  // is a string (have it setup in maker.JSX and list.js in controllers)**
   status: {
     type: String,
     required: true,

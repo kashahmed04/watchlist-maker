@@ -2,6 +2,7 @@ const controllers = require('./controllers');
 const mid = require('./middleware');
 
 // add change password and subscribe pathname with middleware**
+// why are my pathnames not working**
 const router = (app) => {
   app.get('/getList', mid.requiresLogin, controllers.List.getList);
   app.get('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);

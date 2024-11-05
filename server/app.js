@@ -1,5 +1,8 @@
 // can dynamic react components be adding,
-// deleting, copying to clipboard, profit model, and storing files**
+// deleting, copying to clipboard, profit model, and storing files (check with functions)
+// go over code to see if they count for requirements**
+// have uploading photo for the list be optional otherwise show a default image
+// for when we add an item to the list instead of changin profile photo or both**
 require('dotenv').config();
 
 const path = require('path');

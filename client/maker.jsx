@@ -21,8 +21,8 @@ const handleList = (e, onItemAdded) => {
 
 };
 
-// will the dropdown always show a  value by default and prevent this field 
-// from being empty so i dont have to do any error checking server side and it's ok here**
+// will the dropdown always show a value by default and prevent this field 
+// from being empty so I dont have to do any error checking server side and it's ok here**
 const ListForm = (props) => {
     return(
         <form id="domoForm"
@@ -41,7 +41,7 @@ const ListForm = (props) => {
                 <option value="Watching">Watching</option> 
                 <option value="Want to watch">Want to Watch</option>
             </select>
-            <input className="makeDomoSubmit" type="submit" value="Make Domo" />
+            <input className="makeDomoSubmit" type="submit" value="Add to List" />
 
         </form>
     );
