@@ -8,8 +8,8 @@ const handleList = (e, onItemAdded) => {
     e.preventDefault();
     helper.hideError();
 
-    const title = e.target.querySelector('#domoName').value;
-    const status = e.target.querySelector('#domoStatus').value
+    const title = e.target.querySelector('#titleName').value;
+    const status = e.target.querySelector('#titleStatus').value
 
     if(!title || !status){
         helper.handleError('All fields are required');
@@ -21,28 +21,39 @@ const handleList = (e, onItemAdded) => {
 
 };
 
-// will the dropdown always show a value by default and prevent this field 
-// from being empty so I dont have to do any error checking server side and it's ok here**
 const ListForm = (props) => {
-    return(
-        <form id="domoForm"
+    const [username, setUsername] = useState('');
+
+    useEffect(() => {
+        const fetchUsername = async () => {
+            const response = await fetch('/getUserInfo');
+            const data = await response.json();
+            if (response.ok) {
+                setUsername(data.username);
+            }
+        };
+
+        fetchUsername();
+    }, []);
+
+    return (
+        <form id="listForm"
             onSubmit={(e) => handleList(e, props.triggerReload)}
-            name="domoForm"
+            name="listForm"
             action="/maker"
             method="POST"
-            className="domoForm"
+            className="listForm"
         >
-
+            <h2>{username}'s watchlist</h2> 
             <label htmlFor="name">Title: </label>
-            <input id="domoName" type="text" name="name" placeholder="Domo Name" />
+            <input id="titleName" type="text" name="name" placeholder="Title Name" />
             <label htmlFor="status">Status: </label> 
-            <select id="domoStatus" name="status" defaultValue="Want to watch"> 
+            <select id="titleStatus" name="status" defaultValue="Want to watch"> 
                 <option value="Watched">Watched</option> 
                 <option value="Watching">Watching</option> 
                 <option value="Want to watch">Want to Watch</option>
             </select>
-            <input className="makeDomoSubmit" type="submit" value="Add to List" />
-
+            <input className="makeItemSubmit" type="submit" value="Add to List" />
         </form>
     );
 };
@@ -60,7 +71,7 @@ const WatchlistData = (props) => {
     }, [props.reloadItems]);
 
     const handleDelete = async (id) => {
-        helper.sendDelete(`/deleteDomo/${id}`, (result) => {
+        helper.sendDelete(`/deleteItem/${id}`, (result) => {
             if(result.message){
                 setList(items.filter((item) => item._id !== id));
             }
@@ -72,41 +83,41 @@ const WatchlistData = (props) => {
    //are we allows to have console.log() for errors or no**
     const copyToClipboard = async () => {
         if (items.length === 0) {
-            alert("No Domos to copy!");
+            alert("No List to copy!");
             return; 
         }
 
         const listText = items.map(item => `Title: ${item.title}, Status: ${item.status}`).join('\n');
 
+        //we need a try catch since it's async right (we do not have it for some of our functions though)**
         try {
             await navigator.clipboard.writeText(listText);
-            alert("Domo list copied to clipboard!"); 
+            alert("Watchlist copied to clipboard!"); 
         } catch (err) {
             console.error("Failed to copy: ", err); 
-            alert("Failed to copy to clipboard!"); 
+            alert("Failed to copy list to clipboard!"); 
         }
     };
 
     if(items.length === 0){
         return(
-            <div className="domoList">
-                <h3 className="emptyDomo">No Items Yet!</h3>
+            <div className="watchlist">
+                <h3 className="emptyList">No Items Yet!</h3>
             </div>
         );
     }
     const itemNodes = items.map(item => {
         return(
-            <div key={item.id} className="domo">
-                <img src="assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
-                <h3 className="domoName">Title: {item.title}</h3>
-                <h4 className="domoStatus">Status: {item.status}</h4> 
-                <button onClick={() => handleDelete(item._id)}>Delete</button>
+            <div key={item.id} className="item">
+                <h3 className="titleName">Title: {item.title}</h3>
+                <h4 className="titleStatus">Status: {item.status}</h4> 
+                <button onClick={() => handleDelete(item._id)} id="deleteButton">Delete</button>
             </div>
         );
     });
     return(
-        <div className="domoList">
-            <button onClick={copyToClipboard}>Copy List to Clipboard</button> 
+        <div className="watchlist">
+            <button onClick={copyToClipboard} id="copyList">Copy List to Clipboard</button> 
             <div>
                 {itemNodes}
             </div>
@@ -132,40 +143,66 @@ const handlePasswordChange = (e) => {
         return false;
     }
 
-    const response = helper.sendPost(e.target.action, {pass, pass2});
-    
+    helper.sendPost(e.target.action, {pass, pass2});
+
     return false;
 }
 
 const ChangePasswordWindow = (props) => {
     return(
-        <form id="changeForm"
-            name="changeForm"
-            onSubmit={handlePasswordChange}
-            action="/changePassword"
-            method="POST"
-            className="changeForm"
-        >
-            <label htmlFor="pass">Password: </label>
-            <input id="pass" type="password" name="pass" placeholder="password" />
-            <label htmlFor="pass">Retype Password: </label>
-            <input id="pass2" type="password" name="pass2" placeholder="retype password" />
-            <input className="formSubmit" type="submit" value="Change Password" />
+        <div class="changeContainer">
+            <form id="changeForm"
+                name="changeForm"
+                onSubmit={handlePasswordChange}
+                action="/changePassword"
+                method="POST"
+                className="changeForm"
+            >
+                <label htmlFor="pass">Password: </label>
+                <input id="pass" type="password" name="pass" placeholder="password" />
+                <label htmlFor="pass">Retype Password: </label>
+                <input id="pass2" type="password" name="pass2" placeholder="retype password" />
+                <input className="formSubmit" type="submit" value="Change Password" />
 
-        </form>
+            </form>
+        </div>
     );
 };
 
+// Function to handle subscription
+const handleSubscribe = async (e) => {
+    e.preventDefault(); // Prevent default anchor behavior
+    helper.hideError(); // Hide any previous error messages
+
+    // do we need a try catch here since it's async**
+    // Use sendPost to handle the request to subscribe
+    try {
+        console.log("hi");
+        const result = await helper.sendPost('/subscribe', {}); // Await the sendPost result
+
+        
+        if (result.error) {
+            console.log("result found in if" + result);
+            helper.handleError(result.error); // Handle errors from the response
+        } else {
+            console.log("result found in else" + result);
+            alert('Subscription status updated successfully!'); // Notify the user
+        }
+    } catch (error) {
+        console.error("Failed to subscribe:", error);
+        helper.handleError("An error occurred while updating subscription status.");
+    }
+};
 
 const App = () => {
     const [reloadItems, setReloadItems] = useState(false);
 
     return(
         <div>
-            <div id="makeDomo">
+            <div id="makeItem">
                 <ListForm triggerReload={() => setReloadItems(!reloadItems)} />
             </div>
-            <div id="domos">
+            <div id="items">
                 <WatchlistData items={[]} reloadItems={reloadItems} />
             </div>
         </div>
@@ -173,10 +210,13 @@ const App = () => {
 };
 
 const init = () => {
+
     const root = createRoot(document.getElementById('app'));
     root.render( <App /> )
 
     const ChangePasswordButton = document.getElementById('changePassword');
+
+    const ChangeSubscribeButton = document.getElementById('subscribe');
 
     ChangePasswordButton.addEventListener('click', (e) =>{
         e.preventDefault();
@@ -184,7 +224,10 @@ const init = () => {
         return false;
     });
 
+    ChangeSubscribeButton.addEventListener('click', handleSubscribe);
 
-}
+    //() => {helper.sendPost('/subscribe', {})}
+
+};
 
 window.onload = init;

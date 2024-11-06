@@ -1,8 +1,7 @@
 const controllers = require('./controllers');
 const mid = require('./middleware');
 
-// add change password and subscribe pathname with middleware**
-// why are my pathnames not working**
+// Add the pathnames for each request as well as the middleware we need to use.
 const router = (app) => {
   app.get('/getList', mid.requiresLogin, controllers.List.getList);
   app.get('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
@@ -17,11 +16,18 @@ const router = (app) => {
 
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 
-  //is this ok for changing password and put it in account.js for backend then
-  //in maker.JSX have the functionality for the client side**
+  // is this ok for changing password and put it in account.js for backend then
+  // in maker.JSX have the functionality for the client side**
   app.post('/changePassword', mid.requiresLogin, controllers.Account.changePassword);
 
+  // is this ok to put on the users account.js instead of in the list.js as well as changePassword
+  // but we implement this in maker.JSX client side**
+  app.post('/subscribe', mid.requiresLogin, controllers.Account.subscribe);
+
+  // The id is for determining which item to delete from the database.**
   app.delete('/deleteItem/:id', mid.requiresLogin, controllers.List.deleteListItem);
+
+  app.get('/getUserInfo', mid.requiresLogin, controllers.Account.getUserInfo);
 };
 
 module.exports = router;

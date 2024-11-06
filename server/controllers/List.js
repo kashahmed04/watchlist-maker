@@ -1,9 +1,14 @@
 const models = require('../models');
 
+// is this ok to name this variable List or no since List is a datatype as well**
+// Get List.js from the models folder.
 const { List } = models;
 
+// Go to the main page.
 const makerPage = (req, res) => res.render('app');
 
+// Get the watchlist based on the users _id and return it. If there is an error
+// we return the error instead.
 const getList = async (req, res) => {
   try {
     const query = { owner: req.session.account._id };
@@ -18,6 +23,8 @@ const getList = async (req, res) => {
 
 // would we handle title here and dropdown or can dropdown be in the HTML
 // as required and we only handle title here**
+// Make sure all the fields are filled in, create the new item, save it into the database,
+// and return a success status. If there is an error we return the error.
 const makeList = async (req, res) => {
   if (!req.body.title || !req.body.status) {
     return res.status(400).json({ error: 'Title and status are required!' });
@@ -42,6 +49,10 @@ const makeList = async (req, res) => {
   }
 };
 
+// Find the specific item and delete it based on the id.
+// If the item does not exist show the status and message
+// and if there was an error during that process,
+// return the error.
 const deleteListItem = async (req, res) => {
   try {
     const userId = req.session.account._id;
@@ -60,6 +71,7 @@ const deleteListItem = async (req, res) => {
   }
 };
 
+// Export the functions.
 module.exports = {
   makerPage,
   getList,

@@ -17,6 +17,14 @@ const AccountSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  isSubscribed: {
+    type: Boolean,
+    default: false, // Default to false for new accounts
+  },
+  watchlistCounter: {
+    type: Number,
+    default: 0,
+  },
   createdDate: {
     type: Date,
     default: Date.now,
@@ -26,6 +34,7 @@ const AccountSchema = new mongoose.Schema({
 AccountSchema.statics.toAPI = (doc) => ({
   username: doc.username,
   _id: doc._id,
+  isSubscribed: doc.isSubscribed,
 });
 
 AccountSchema.statics.generateHash = (password) => bcrypt.hash(password, saltRounds);
@@ -44,6 +53,12 @@ AccountSchema.statics.authenticate = async (username, password, callback) => {
   } catch (err) {
     return callback(err);
   }
+};
+
+// Toggle subscription status
+AccountSchema.methods.toggleSubscription = async function () {
+  this.isSubscribed = !this.isSubscribed;
+  await this.save();
 };
 
 AccountModel = mongoose.model('Account', AccountSchema);

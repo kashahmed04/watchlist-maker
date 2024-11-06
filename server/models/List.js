@@ -4,6 +4,7 @@ const _ = require('underscore');
 
 const setName = (title) => _.escape(title).trim();
 
+// Schema of what each list item will contain.
 const ListSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -28,10 +29,12 @@ const ListSchema = new mongoose.Schema({
   },
 });
 
+// Do we need this here or can we delete it since we do not use it**
 ListSchema.statics.toAPI = (doc) => ({
   title: doc.title,
   status: doc.status,
 });
 
+// Create the model based on the schema.
 const ListModel = mongoose.model('Item', ListSchema);
 module.exports = ListModel;

@@ -1,7 +1,7 @@
 
 const handleError = (message) => {
     document.getElementById('errorMessage').textContent = message;
-    document.getElementById('domoMessage').classList.remove('hidden');
+    document.getElementById('itemMessage').classList.remove('hidden');
 };
 
 //is it ok for title to have numbers as well since some titles have numbers in it
@@ -23,7 +23,7 @@ const sendPost = async (url, data, handler) => {
   
     const result = await response.json();
 
-    document.getElementById('domoMessage').classList.add('hidden');
+    document.getElementById('itemMessage').classList.add('hidden');
 
     if(result.redirect) {
       window.location = result.redirect;
@@ -54,7 +54,7 @@ const sendDelete = async (url, handler) => {
 };
 
 const hideError = () => {
-    document.getElementById('domoMessage').classList.add('hidden');
+  document.getElementById('itemMessage').classList.add('hidden');
 };
   
 module.exports = {
