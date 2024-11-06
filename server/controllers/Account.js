@@ -118,40 +118,18 @@ const subscribe = async (req, res) => {
     // do we have to put this in the model for an account**
     user.isSubscribed = !user.isSubscribed;
 
-    // console.log(user.isSubscribed);
-    // if (!user.isSubscribed && user.watchlistCounter >= 5) {
-    //   return res.status(403).json({ error: 'You must subscribe to add more than 5 items to your watchlist.' });
-    // }
-
-    // user.watchlistCounter++;
     await user.save();
+
+    //access the users information by doing req.session.account.isSubscribed right**
+    //store the users isSubscribed in here right (don't we do toAPI in signup and login though)**
+    //we do this after we save the data right to get the latest changes**
+    req.session = Account.toAPI(user);
 
     return res.status(200).json({ message: 'Subscription changed successfully.' });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: 'Failed to change subscription status.' });
   }
-};
-
-// We get the users id and get the specific item, and
-// if the user is not subscribed and their watchlist length
-// is greater than or equal to 5, we say that they have to subscribe to
-// be able to increase the size of items they can add to the list
-// otherwise, we add the item to the list and save the data
-// and return a success message to the user.
-const addItemToWatchlist = async (req, res) => {
-  const user = await Account.findById(req.session.account._id);
-  //const { item } = req.body;
-
-  console.log(user.isSubscribed);
-  if (!user.isSubscribed && user.watchlistCounter >= 5) {
-    return res.status(403).json({ error: 'You must subscribe to add more than 5 items to your watchlist.' });
-  }
-
-  user.watchlistCounter++;
-  await user.save();
-
-  return res.status(200).json({ message: 'Item added to watchlist!' });
 };
 
 // is this ok to get user info. to show their username**
@@ -172,6 +150,5 @@ module.exports = {
   signup,
   changePassword,
   subscribe,
-  addItemToWatchlist,
   getUserInfo,
 };

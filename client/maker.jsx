@@ -173,25 +173,13 @@ const ChangePasswordWindow = (props) => {
 const handleSubscribe = async (e) => {
     e.preventDefault(); // Prevent default anchor behavior
     helper.hideError(); // Hide any previous error messages
-
-    // do we need a try catch here since it's async**
-    // Use sendPost to handle the request to subscribe
-    try {
-        console.log("hi");
-        const result = await helper.sendPost('/subscribe', {}); // Await the sendPost result
-
-        
-        if (result.error) {
-            console.log("result found in if" + result);
-            helper.handleError(result.error); // Handle errors from the response
-        } else {
-            console.log("result found in else" + result);
-            alert('Subscription status updated successfully!'); // Notify the user
+    
+    helper.sendPost('/subscribe', {}, (result) => {
+        if(result.message){
+            const subscribeButton = document.getElementById('subscribe');
+            subscribeButton.innerHTML = 'Unsubscribe';
         }
-    } catch (error) {
-        console.error("Failed to subscribe:", error);
-        helper.handleError("An error occurred while updating subscription status.");
-    }
+    }); // Await the sendPost result
 };
 
 const App = () => {

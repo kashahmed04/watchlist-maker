@@ -5,6 +5,8 @@
 // why am I getting an uncaught type error for when I login but the login still works**
 // does my main page look different from domo maker**
 // change password is cutting off why**
+// when i add 5 items without subscribing it works and says to subscribe but 
+// when I subscribe it does not work and there is a problem with the POST request.**
 
 // have uploading photo for the list be optional otherwise show a default image
 // for when we add an item to the list instead of changing profile photo or both**

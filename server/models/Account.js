@@ -21,16 +21,13 @@ const AccountSchema = new mongoose.Schema({
     type: Boolean,
     default: false, // Default to false for new accounts
   },
-  watchlistCounter: {
-    type: Number,
-    default: 0,
-  },
   createdDate: {
     type: Date,
     default: Date.now,
   },
 });
 
+//we do not store password or createdDate in the toAPI right**
 AccountSchema.statics.toAPI = (doc) => ({
   username: doc.username,
   _id: doc._id,

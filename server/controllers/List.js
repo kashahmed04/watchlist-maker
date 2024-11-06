@@ -25,10 +25,20 @@ const getList = async (req, res) => {
 // as required and we only handle title here**
 // Make sure all the fields are filled in, create the new item, save it into the database,
 // and return a success status. If there is an error we return the error.
+// cheeck in the database and if someone goes to make a list entry then check if they are subscribed
+// and if not do they have 5 items, if so then reject them adding the item
 const makeList = async (req, res) => {
+  //400 error if not enough space
+  const current = await List.find({owner: req.session.account._id}).exec();
+
+  if(!req.session.account.isSubscribed && current.length >= 5){
+    return res.status(400).json({ error: 'Subscribe to add more items!' });
+  }
+
   if (!req.body.title || !req.body.status) {
     return res.status(400).json({ error: 'Title and status are required!' });
   }
+
   const listData = {
     title: req.body.title,
     status: req.body.status,
