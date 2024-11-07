@@ -31,8 +31,8 @@ const router = (app) => {
 
   //is this ok or should there be any middleware and how do I know which function to route
   //to since a 404 error can happen anywhere**
-  //go over 404 routing and how to test (here and in list.js)**
-  app.get('/404Error',controllers.List.renderErrorPage);
+  //go over 404 routing and how to test (here and in list.js in controllers)**
+  app.get('/*', controllers.List.renderErrorPage);
 };
 
 module.exports = router;

@@ -237,7 +237,7 @@ nav:nth-child(1) {
 }
 
 #defaultImage{
-    width: 50%; /* Full width of the parent container */ 
+    width: 30%; /* Full width of the parent container */ 
     height: auto; /* Maintain aspect ratio */
 }
 

@@ -101,6 +101,7 @@ const changePassword = async (req, res) => {
 
     return res.json({ redirect: '/logout' });
     // is this ok instead of returning the status and the return statement**
+    // how does this work if we do not destroy the session**
     // return logout(req, res);
   } catch (err) {
     console.log(err);
