@@ -22,6 +22,18 @@
 // is the delete ok for showing errors if we double tap to delete one item**
 // is UI ok or is it too similar to domo maker**
 // errors are ok in the console if something cannot be done right**
+// warning in console about each child in a list should have a unique "key" prop
+// when the application starts**
+// are error messages ok for when text is less and the text showing up towards the top of the textbox**
+// is the button color ok for copying to clipboard and add to list because of the background for
+// copy list to clipboard**
+// should image go after or before the delete button**
+// how to handle adding an image and having a default image for watchlist instead
+// of profiles**
+// is logic ok for only handling titlename and status why does it say 
+// all fields required when I want to make adding an image optional otherwise 
+// put the popcorn image if nothing is selected for an image (would the logic be in 
+// handleList for the image for each item in the list)**
 
 // have uploading photo for the list be optional otherwise show a default image
 // for when we add an item to the list instead of changing profile photo or both**

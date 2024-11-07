@@ -37,6 +37,7 @@ const ListForm = (props) => {
     }, []);
 
     return (
+        <div id="addItemsList">
         <form id="listForm"
             onSubmit={(e) => handleList(e, props.triggerReload)}
             name="listForm"
@@ -44,17 +45,19 @@ const ListForm = (props) => {
             method="POST"
             className="listForm"
         >
-            <h2>{username}'s watchlist</h2> 
-            <label htmlFor="name">Title: </label>
+            <h2 id="usersWatchlist">{username}'s watchlist</h2> 
+            <label htmlFor="name" id="titleHeading">Title: </label>
             <input id="titleName" type="text" name="name" placeholder="Title Name" />
-            <label htmlFor="status">Status: </label> 
+            <label htmlFor="status" id="statusHeading">Status: </label> 
             <select id="titleStatus" name="status" defaultValue="Want to watch"> 
                 <option value="Watched">Watched</option> 
                 <option value="Watching">Watching</option> 
                 <option value="Want to watch">Want to Watch</option>
             </select>
+            <button id="addImage">Add Image</button>
             <input className="makeItemSubmit" type="submit" value="Add to List" />
         </form>
+        </div>
     );
 };
 
@@ -110,7 +113,8 @@ const WatchlistData = (props) => {
         return(
             <div key={item.id} className="item">
                 <h3 className="titleName">Title: {item.title}</h3>
-                <h4 className="titleStatus">Status: {item.status}</h4> 
+                <h4 className="titleStatus">Status: {item.status}</h4>
+                <img id="defaultImage" src="/assets/img/popcorn.png" alt="popcorn"/>
                 <button onClick={() => handleDelete(item._id)} id="deleteButton">Delete</button>
             </div>
         );
@@ -175,9 +179,9 @@ const handleSubscribe = async (e) => {
     helper.hideError(); // Hide any previous error messages
     
     helper.sendPost('/subscribe', {}, (result) => {
-        if(result.message){
+        if(typeof result.subscribed === 'boolean'){
             const subscribeButton = document.getElementById('subscribe');
-            subscribeButton.innerHTML = result.subscribed ? 'Unsubscribed' : 'Subscribe';
+            subscribeButton.innerHTML = result.subscribed ? 'Unsubscribe' : 'Subscribe';
         }
     }); // Await the sendPost result
 };
