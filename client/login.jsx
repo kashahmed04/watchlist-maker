@@ -43,7 +43,7 @@ const handleSignup = (e) => {
 
 const LoginWindow = (props) => {
     return(
-        <div class="loginContainer">
+        <div className="loginContainer">
             <form id="loginForm"
                 name="loginForm"
                 onSubmit={handleLogin}
@@ -65,7 +65,7 @@ const LoginWindow = (props) => {
 
 const SignupWindow = (props) => {
     return(
-        <div class="signupContainer">
+        <div className="signupContainer">
             <form id="signupForm"
                 name="signupForm"
                 onSubmit={handleSignup}

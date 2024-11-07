@@ -7,6 +7,10 @@ const { List } = models;
 // Go to the main page.
 const makerPage = (req, res) => res.render('app');
 
+const renderErrorPage = (req, res) => {
+  res.render('error');
+};
+
 // Get the watchlist based on the users _id and return it. If there is an error
 // we return the error instead.
 const getList = async (req, res) => {
@@ -71,7 +75,7 @@ const deleteListItem = async (req, res) => {
     const item = await List.findOne({ _id: id, owner: userId });
 
     if (!item) {
-      return res.status(404).json({ message: 'Item not found' });
+      return res.status(404).json({ redirect: '/404Error' });
     }
 
     await List.findByIdAndDelete(id);
@@ -84,6 +88,7 @@ const deleteListItem = async (req, res) => {
 // Export the functions.
 module.exports = {
   makerPage,
+  renderErrorPage,
   getList,
   makeList,
   deleteListItem,

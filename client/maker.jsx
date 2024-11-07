@@ -154,7 +154,7 @@ const handlePasswordChange = (e) => {
 
 const ChangePasswordWindow = (props) => {
     return(
-        <div class="changeContainer">
+        <div className="changeContainer">
             <form id="changeForm"
                 name="changeForm"
                 onSubmit={handlePasswordChange}

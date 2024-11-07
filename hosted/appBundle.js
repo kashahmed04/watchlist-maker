@@ -33711,7 +33711,7 @@ const handlePasswordChange = e => {
 };
 const ChangePasswordWindow = props => {
   return /*#__PURE__*/React.createElement("div", {
-    class: "changeContainer"
+    className: "changeContainer"
   }, /*#__PURE__*/React.createElement("form", {
     id: "changeForm",
     name: "changeForm",

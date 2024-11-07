@@ -34,6 +34,9 @@
 // all fields required when I want to make adding an image optional otherwise 
 // put the popcorn image if nothing is selected for an image (would the logic be in 
 // handleList for the image for each item in the list)**
+// is transition of border color ok for hovering over items**
+// how to route 404 page and I only have one 404 error is that ok**
+// add image button also adds items to the list why**
 
 // have uploading photo for the list be optional otherwise show a default image
 // for when we add an item to the list instead of changing profile photo or both**
@@ -60,6 +63,7 @@
 // and make room for image upload or default image on the right in flexbox), 
 // 404 page (only)**, separate CSS file for 404 page (HTML page or handlebars)**,
 // uploading file for images functionality**
+// style 404 page and make sure it works**
 require('dotenv').config();
 
 const path = require('path');

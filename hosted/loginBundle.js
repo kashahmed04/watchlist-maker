@@ -33589,7 +33589,7 @@ const handleSignup = e => {
 };
 const LoginWindow = props => {
   return /*#__PURE__*/React.createElement("div", {
-    class: "loginContainer"
+    className: "loginContainer"
   }, /*#__PURE__*/React.createElement("form", {
     id: "loginForm",
     name: "loginForm",
@@ -33619,7 +33619,7 @@ const LoginWindow = props => {
 };
 const SignupWindow = props => {
   return /*#__PURE__*/React.createElement("div", {
-    class: "signupContainer"
+    className: "signupContainer"
   }, /*#__PURE__*/React.createElement("form", {
     id: "signupForm",
     name: "signupForm",
