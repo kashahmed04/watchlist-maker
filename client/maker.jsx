@@ -159,9 +159,9 @@ const ChangePasswordWindow = (props) => {
                 className="changeForm"
             >
                 <label htmlFor="pass">Password: </label>
-                <input id="pass" type="password" name="pass" placeholder="password" />
+                <input id="pass" type="password" name="pass" placeholder="Password" />
                 <label htmlFor="pass">Retype Password: </label>
-                <input id="pass2" type="password" name="pass2" placeholder="retype password" />
+                <input id="pass2" type="password" name="pass2" placeholder="Retype password" />
                 <input className="formSubmit" type="submit" value="Change Password" />
 
             </form>
@@ -177,7 +177,7 @@ const handleSubscribe = async (e) => {
     helper.sendPost('/subscribe', {}, (result) => {
         if(result.message){
             const subscribeButton = document.getElementById('subscribe');
-            subscribeButton.innerHTML = 'Unsubscribe';
+            subscribeButton.innerHTML = result.subscribed ? 'Unsubscribed' : 'Subscribe';
         }
     }); // Await the sendPost result
 };

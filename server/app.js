@@ -1,12 +1,27 @@
 // can dynamic react components be adding,
-// deleting, copying to clipboard, profit model, and storing files (check with functions)
+// deleting, copying to clipboard, profit model, and storing files (check with functions)**
 // go over code to see if they count for requirements**
 // subscribe and change password not working**
 // why am I getting an uncaught type error for when I login but the login still works**
 // does my main page look different from domo maker**
-// change password is cutting off why**
-// when i add 5 items without subscribing it works and says to subscribe but 
-// when I subscribe it does not work and there is a problem with the POST request.**
+// change password button is cutting off why**
+// when I add 5 items without subscribing it works and says to subscribe but
+// when I subscribe it does not work and there is a problem with the POST request**
+// how do I toggle the state of the HTML element based on the subscription status**
+// if the person unsubscribes should we take away the items that are greater than 5
+// or leave them there and say they have to subscribe to add more items**
+// make sure shadow is not showing for the logo when we hover over it**
+// sometimes error image shows up on top of the scroll bar how do we make it go
+// below or is it ok there**
+// is speech box ok where image is for error or how should we move it**
+// data not showing up in mongoDB when I add data to the watchlist**
+// are we allowed to use alert for the clipboard (go over function for it)**
+// should we still have conditonal if no items are in the list for copy
+// to clipboard if the button only shows up when items are added to the list
+// and already takes care of it**
+// is the delete ok for showing errors if we double tap to delete one item**
+// is UI ok or is it too similar to domo maker**
+// errors are ok in the console if something cannot be done right**
 
 // have uploading photo for the list be optional otherwise show a default image
 // for when we add an item to the list instead of changing profile photo or both**
@@ -25,9 +40,14 @@
 // make nav bar responive (is the responsiveness ok)**
 // make sure there is no domo in final submission**
 // should I make watchlist vertical or horizontal (looks similar to domo maker)**
-// can I just change background color instead of making the bottom area a 
+// can I just change background color instead of making the bottom area a
 // flexbox since the above 2 areas are a flexbox already and the color will not get affected
 // for those to areas**
+
+// app.js styling (get each list item information to show on the left side
+// and make room for image upload or default image on the right in flexbox), 
+// 404 page (only)**, separate CSS file for 404 page (HTML page or handlebars)**,
+// uploading file for images functionality**
 require('dotenv').config();
 
 const path = require('path');
@@ -78,7 +98,7 @@ redisClient.connect().then(() => {
     saveUninitialized: false,
   }));
 
-  app.use(favicon(`${__dirname}/../hosted/img/favicon.png`));
+  app.use(favicon(`${__dirname}/../hosted/img/popcorn.png`));
   app.use(compression());
 
   app.use(bodyParser.urlencoded({ extended: true }));

@@ -92,16 +92,16 @@ const changePassword = async (req, res) => {
 
   try {
     // find and update the user's password
-    //const user = await Account.findOne({ _id: req.session.account._id });
+    // const user = await Account.findOne({ _id: req.session.account._id });
     const password = await Account.generateHash(pass);
-    //await user.save();
-    await Account.findByIdAndUpdate(req.session.account._id, {password: password});
+    // await user.save();
+    await Account.findByIdAndUpdate(req.session.account._id, { password });
 
-    console.log("password change successful");
+    console.log('password change successful');
 
     return res.json({ redirect: '/logout' });
     // is this ok instead of returning the status and the return statement**
-    //return logout(req, res);
+    // return logout(req, res);
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: 'An error occurred while changing password!' });
@@ -120,12 +120,12 @@ const subscribe = async (req, res) => {
 
     await user.save();
 
-    //access the users information by doing req.session.account.isSubscribed right**
-    //store the users isSubscribed in here right (don't we do toAPI in signup and login though)**
-    //we do this after we save the data right to get the latest changes**
-    req.session = Account.toAPI(user);
+    // access the users information by doing req.session.account.isSubscribed right**
+    // store the users isSubscribed in here right (don't we do toAPI in signup and login though)**
+    // we do this after we save the data right to get the latest changes**
+    req.session.account = Account.toAPI(user);
 
-    return res.status(200).json({ message: 'Subscription changed successfully.' });
+    return res.status(200).json({ message: 'Subscription changed successfully.', subscribed: user.isSubscribed });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: 'Failed to change subscription status.' });

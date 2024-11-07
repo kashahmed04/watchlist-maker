@@ -28,15 +28,15 @@ const getList = async (req, res) => {
 // cheeck in the database and if someone goes to make a list entry then check if they are subscribed
 // and if not do they have 5 items, if so then reject them adding the item
 const makeList = async (req, res) => {
-  //400 error if not enough space
-  const current = await List.find({owner: req.session.account._id}).exec();
-
-  if(!req.session.account.isSubscribed && current.length >= 5){
-    return res.status(400).json({ error: 'Subscribe to add more items!' });
-  }
-
   if (!req.body.title || !req.body.status) {
     return res.status(400).json({ error: 'Title and status are required!' });
+  }
+
+  // 400 error if not enough space
+  const current = await List.find({ owner: req.session.account._id }).exec();
+
+  if (!req.session.account.isSubscribed && current.length >= 5) {
+    return res.status(400).json({ error: 'Subscribe to add more items!' });
   }
 
   const listData = {

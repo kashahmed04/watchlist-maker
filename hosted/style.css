@@ -14,13 +14,13 @@ html, body {
     float:left;
     border-radius: 8px;
     transition: transform 0.3s ease, opacity 0.3s ease;
-    background: none;
+    background-color: transparent;
 }
 
 #logo:hover { 
     transform: scale(1.05); /* Scale the logo slightly */ 
     opacity: 0.8; /* Slightly reduce opacity */
-    background: none;
+    background-color: transparent;
 }
 
 nav {
@@ -163,12 +163,12 @@ nav:nth-child(1) {
 #errorImage {
     z-index: 225;
     margin-top: -20px;
-    margin-left: 135px;
+    margin-left: 100px;
     height: 450px;
     width: 300px;
     -ms-transform: rotate(330deg);
     -webkit-transform: rotate(330deg); 
-    transform: rotate(330deg);
+    transform: rotate(345deg);
 }
 
 #items {
@@ -205,15 +205,6 @@ nav:nth-child(1) {
     border-color: rgba(255,255,255, 0.8);
     transition: background-color 2.6s ease-out;
     background-color: #66bfff;
-}
-
-
-img.domoFace {
-    justify-content: center;
-    height: 50px;
-    width: 50px;
-    border-radius: 4px;
-    margin-top:10px;
 }
 
 h3.emptyList {
@@ -314,6 +305,7 @@ h4.titleStatus{
     box-shadow: none;
 }
 
+/*is it ok to specify the form submit here or just say .formsubmit**/
 #loginForm input.formSubmit, #signupForm input.formSubmit, #changeForm input.formSubmit {
     margin-top: 20px; /* Space above submit button */
     background: #66acee;
@@ -350,7 +342,7 @@ h4.titleStatus{
     font-style: normal;     
     color: #66acee;
     text-align: center;
-    font-size: 1.1em;
+    font-size: medium;
     width: 180px;
     border-radius: 6px;
 }
