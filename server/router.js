@@ -34,6 +34,7 @@ const router = (app) => {
   //to since a 404 error can happen anywhere****
   //go over 404 routing and how to test (here and in list.js in controllers)**
   app.get('/*', mid.requiresSecure, controllers.List.renderErrorPage);
+  app.get('/documentation', mid.requiresSecure, controllers.List.documentationPage);
 };
 
 module.exports = router;

@@ -10,6 +10,8 @@ const makerPage = (req, res) => res.render('app');
 //is this ok for 404**
 const renderErrorPage = (req, res) => res.render('error');
 
+const documentationPage = (req, res) => res.render('documentation');
+
 // Get the watchlist based on the users _id and return it. If there is an error
 // we return the error instead.
 const getList = async (req, res) => {
@@ -90,6 +92,7 @@ const deleteListItem = async (req, res) => {
 module.exports = {
   makerPage,
   renderErrorPage,
+  documentationPage,
   getList,
   makeList,
   deleteListItem,

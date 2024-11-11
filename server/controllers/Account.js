@@ -83,7 +83,7 @@ const changePassword = async (req, res) => {
 
   const pass2 = `${req.body.pass2}`;
 
-  const oldPassword = `${req.body.oldPa}`;
+  const oldPassword = `${req.body.oldPass}`;
 
   if (!pass || !pass2) {
     return res.status(400).json({ error: 'All fields are required!' });
@@ -93,7 +93,7 @@ const changePassword = async (req, res) => {
     return res.status(400).json({ error: 'Passwords do not match!' });
   }
 
-  Account.authenticate(oldPassword, pass, (err, account)  => {
+  Account.authenticate(req.session.account.username, oldPassword, (err, account)  => {
     if (err || !account) {
       return res.status(401).json({ error: 'New password cant be current password!' });
     }

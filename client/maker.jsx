@@ -4,25 +4,27 @@ const React = require('react');
 const { useState, useEffect } = React;
 const { createRoot } = require('react-dom/client');
 
-const handleList = (e, onItemAdded) => {
-    e.preventDefault();
-    helper.hideError();
-
-    const title = e.target.querySelector('#titleName').value;
-    const status = e.target.querySelector('#titleStatus').value
-
-    if(!title || !status){
-        helper.handleError('All fields are required');
-        return false;
-    }
-
-    helper.sendPost(e.target.action, {title, status}, onItemAdded);
-    return false;
-
-};
 
 const ListForm = (props) => {
+
     const [username, setUsername] = useState('');
+
+    const handleList = (e, onItemAdded) => {
+        e.preventDefault();
+        helper.hideError();
+    
+        const title = e.target.querySelector('#titleName').value;
+        const status = e.target.querySelector('#titleStatus').value
+    
+        if(!title || !status){
+            helper.handleError('All fields are required!');
+            return false;
+        }
+    
+        helper.sendPost(e.target.action, {title, status}, onItemAdded);
+        return false;
+    
+    };
 
     useEffect(() => {
         const fetchUsername = async () => {
@@ -127,36 +129,38 @@ const WatchlistData = (props) => {
    );
 };
 
- //go over****
-const handlePasswordChange = (e) => {
-    e.preventDefault();
-    helper.hideError();
-
-    const pass = e.target.querySelector('#pass').value;
-    const pass2 = e.target.querySelector('#pass2').value;
-    const oldPass = e.target.querySelector('#oldPass').value;
-
-    if(!pass || !pass2){
-        helper.handleError('All fields are required!');
-        return false;
-    }
-
-    if(pass !== pass2){
-        helper.handleError('Passwords do not match!');
-        return false;
-    }
-
-    if(pass === oldPass){
-        helper.handleError('New password cant be current password!');
-        return false;
-    }
-
-    helper.sendPost(e.target.action, {pass, pass2, oldPass});
-
-    return false;
-}
+ //go over***
 
 const ChangePasswordWindow = (props) => {
+
+    const handlePasswordChange = (e) => {
+        e.preventDefault();
+        helper.hideError();
+    
+        const pass = e.target.querySelector('#pass').value;
+        const pass2 = e.target.querySelector('#pass2').value;
+        const oldPass = e.target.querySelector('#oldPass').value;
+    
+        if(!pass || !pass2){
+            helper.handleError('All fields are required!');
+            return false;
+        }
+    
+        if(pass !== pass2){
+            helper.handleError('Passwords do not match!');
+            return false;
+        }
+    
+        if(pass === oldPass){
+            helper.handleError('New password cant be current password!');
+            return false;
+        }
+    
+        helper.sendPost(e.target.action, {pass, pass2, oldPass});
+    
+        return false;
+    }
+
     return(
         <div className="changeContainer">
             <form id="changeForm"
@@ -178,21 +182,7 @@ const ChangePasswordWindow = (props) => {
         </div>
     );
 };
-
-// Function to handle subscription
-const handleSubscribe = async (e) => {
-    e.preventDefault(); // Prevent default anchor behavior
-    helper.hideError(); // Hide any previous error messages
-
-
-    helper.sendPost('/subscribe', {}, (result) => {
-        if(typeof result.subscribed === 'boolean'){
-            const subscribeButton = document.getElementById('subscribe');
-            subscribeButton.innerHTML = result.subscribed ? 'Unsubscribe' : 'Subscribe';
-        }
-    }); 
-};
-
+// Function to handle subscriptio
 const App = () => {
     const [reloadItems, setReloadItems] = useState(false);
 
@@ -208,14 +198,33 @@ const App = () => {
     );
 };
 
+const SubscribeButton = (props) => {
+    const handleSubscribe = async (e) => {
+        e.preventDefault(); // Prevent default anchor behavior
+        helper.hideError(); // Hide any previous error messages
+    
+    
+        helper.sendPost('/subscribe', {}, (result) => {
+            if(typeof result.subscribed === 'boolean'){
+                const subscribeButton = document.getElementById('subscribe');
+                subscribeButton.innerHTML = result.subscribed ? 'Unsubscribe' : 'Subscribe';
+            }
+        }); 
+    };
+    
+    return(<div className="navlink"><a id = 'subscribe' href="/subscribe" onClick={handleSubscribe}>Subscribe</a></div>);
+};
+
+
 const init = () => {
 
     const root = createRoot(document.getElementById('app'));
     root.render( <App /> )
 
-    const ChangePasswordButton = document.getElementById('changePassword');
+    const subscribeRoot = createRoot(document.getElementById('subscribeButton'));
+    subscribeRoot.render(<SubscribeButton />);
 
-    const ChangeSubscribeButton = document.getElementById('subscribe');
+    const ChangePasswordButton = document.getElementById('changePassword');
 
     ChangePasswordButton.addEventListener('click', (e) =>{
         e.preventDefault();
@@ -232,8 +241,8 @@ const init = () => {
         });
     });
 
-    
-    ChangeSubscribeButton.addEventListener('click', handleSubscribe);
+
+
 
     //() => {helper.sendPost('/subscribe', {})}
 
