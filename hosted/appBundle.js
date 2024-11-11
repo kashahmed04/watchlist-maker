@@ -28,6 +28,8 @@ const sendPost = async (url, data, handler) => {
     },
     body: JSON.stringify(data)
   });
+
+  //everything returns JSON from the server right for return type****
   const result = await response.json();
   document.getElementById('itemMessage').classList.add('hidden');
   if (result.redirect) {
@@ -33765,9 +33767,8 @@ const App = () => {
 };
 const SubscribeButton = props => {
   const handleSubscribe = async e => {
-    e.preventDefault(); // Prevent default anchor behavior
-    helper.hideError(); // Hide any previous error messages
-
+    e.preventDefault();
+    helper.hideError();
     helper.sendPost('/subscribe', {}, result => {
       if (typeof result.subscribed === 'boolean') {
         const subscribeButton = document.getElementById('subscribe');
@@ -33802,8 +33803,6 @@ const init = () => {
       }
     });
   });
-
-  //() => {helper.sendPost('/subscribe', {})}
 };
 window.onload = init;
 })();

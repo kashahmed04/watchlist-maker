@@ -9,7 +9,7 @@ html, body {
 
 #logo {
     height: 40px;
-    width: 40;
+    width: 40px;
     padding-top: 5px;
     float:left;
     border-radius: 8px;
@@ -30,7 +30,6 @@ nav {
     background-color: #ffcc5f;
     font-family: "Itim", cursive;
     font-weight: bold;
-    font-style: normal;
     font-size: medium;
 }
 

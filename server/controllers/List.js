@@ -10,6 +10,7 @@ const makerPage = (req, res) => res.render('app');
 //is this ok for 404**
 const renderErrorPage = (req, res) => res.render('error');
 
+//is it ok to put this in List.js because this routes in both pages**
 const documentationPage = (req, res) => res.render('documentation');
 
 // Get the watchlist based on the users _id and return it. If there is an error

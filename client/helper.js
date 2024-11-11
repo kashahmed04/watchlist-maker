@@ -21,6 +21,7 @@ const sendPost = async (url, data, handler) => {
       body: JSON.stringify(data),
     });
   
+    //everything returns JSON from the server right for return type****
     const result = await response.json();
 
     document.getElementById('itemMessage').classList.add('hidden');

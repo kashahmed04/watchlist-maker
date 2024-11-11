@@ -200,8 +200,8 @@ const App = () => {
 
 const SubscribeButton = (props) => {
     const handleSubscribe = async (e) => {
-        e.preventDefault(); // Prevent default anchor behavior
-        helper.hideError(); // Hide any previous error messages
+        e.preventDefault(); 
+        helper.hideError(); 
     
     
         helper.sendPost('/subscribe', {}, (result) => {
@@ -231,7 +231,7 @@ const init = () => {
         root.render( <ChangePasswordWindow />);
         return false;
     });
-
+    
     fetch('/getSubscribed').then(res => {
         res.json().then(result => {
             if(typeof result.subscribed === 'boolean'){
@@ -240,11 +240,6 @@ const init = () => {
             }
         });
     });
-
-
-
-
-    //() => {helper.sendPost('/subscribe', {})}
 
 };
 

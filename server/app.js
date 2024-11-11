@@ -1,10 +1,5 @@
 // can dynamic react components be adding,
 // deleting, copying to clipboard, profit model, and storing files (check with functions)(and socket)****
-// make subscribe a react component****
-// how do make subacribe a react component would we just change the maker.JSX and app.handlebars and server
-// side is ok****
-// talk about how to use socket in project****
-// update the watchlist for a rating for socket(good, bad, ok, excellent, etc.)****
 // can storing files be used for honors requirement instead of socket (use socket)**
 // errors are ok in the console if something cannot be done right (delete the console.log() statements)**
 // should image go after or before the delete button (take away images)**
@@ -18,13 +13,22 @@
 // for Account passwords must be stored using a password-safe form of encryption
 // (such as bcrypt) is that the hashing function we made for passwords (for changing and creating password only)**
 
+// even though we have url encoded on the bottom if we do not use it the endpoint is JSON right****
+// is handlebars file ok for documentation****
+// we just need the router points for documentation right****
+// check documenation****
+// GET requests handles HEAD requests too so we can just say GET, HEAD for documentation for GET requests
+// right****
+// do we need requires secure for every path or just login and signup****
+// the last function does not count as middleware so we do not add it to our documentaiton right
+// for router****
+
 // have uploading photo for the list be optional otherwise show a default image
 // for when we add an item to the list instead of changing profile photo or both**
 // does mongoDB make each collection plural by default (list (item) and account in models.js)****
 // I had a domo and list colection and deleted them in the database so are they deleted in general
 // or how do we know when they are deleted from all accounts in general****
 // do we have to comment this file or no**
-// do we have to have functionality if the password change is the same as current password (yes)****
 // make sure there is no domo in final submission**
 
 // app.js styling (get each list item information to show on the left side

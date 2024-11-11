@@ -1,0 +1,107 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: #F15B42;
+}
+
+#logo {
+    height: 40px;
+    width: 40px;
+    padding-top: 5px;
+    float: left;
+    border-radius: 8px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    background-color: transparent;
+}
+
+nav {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    height: 50px;
+    background-color: #ffcc5f;
+    font-family: "Itim", cursive;
+    font-weight: bold;
+    font-style: normal;
+    font-size: medium;
+}
+
+nav:nth-child(1) {
+    padding-left: 25px;
+}
+
+.navlink {
+    padding: 5px;
+    padding-top: 12px;
+    padding-left: 20px;
+    color: white;
+    font-size: 1.3em;
+    float: left;
+}
+
+.navlink a, .navlink a:link, .navlink a:visited, .navlink a:hover, .navlink a:active {
+    color: #66acee;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: #F15B42;
+    transition: background-color 0.4s ease;
+}
+
+.navlink a:hover {
+    transform: translate(-0.05em, -0.05em);
+    box-shadow: 0.15em 0.15em;
+}
+
+.navlink a:active {
+    transform: translate(0.05em, 0.05em);
+    box-shadow: 0.05em 0.05em;
+}
+
+h1{
+    font-family: "Itim", cursive;
+    font-weight: bold;
+    font-size: xx-large;
+    color: #ffcc5f;
+    text-align: center;
+}
+
+#top {
+    text-align: center; /*center-align text */
+    margin-bottom: 50px; /*space below the title section*/
+    margin-top: 50px;
+}
+  
+/*use flexbox to arrange search blocks in a row */
+#top {
+    display: flex; /*flexbox for layout */
+    flex-wrap: wrap; /*allow wrapping to next line if there's not enough space */
+    justify-content: center; /*center the blocks horizontally */
+}
+
+/*style for each search block */
+.routes {
+    margin: 25px; /*space around each search block */
+    padding: 15px; /*padding inside the boxes */
+    border-radius: 8px; /* round the corners */
+    width: 300px; /*fixed width for uniformity */
+    background-color:  #ffcc5f;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8); 
+}
+
+h2 {
+    font-family: "Itim", cursive;
+    font-weight: bold;
+    font-size: x-large;
+    color: #66acee;
+}
+
+h3 {
+    font-family: "Fredoka", serif;
+    font-weight: bold;
+    font-size: medium;
+    color: #F15B42;
+}
