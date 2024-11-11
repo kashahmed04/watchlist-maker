@@ -1,67 +1,31 @@
 // can dynamic react components be adding,
-// deleting, copying to clipboard, profit model, and storing files (check with functions)**
-// can storing files be used for honors requirement instead of socket**
-// go over code to see if they count for requirements**
-// subscribe and change password not working**
-// why am I getting an uncaught type error for when I login but the login still works**
-// does my main page look different from domo maker**
-// change password button is cutting off why**
-// when I add 5 items without subscribing it works and says to subscribe but
-// when I subscribe it does not work and there is a problem with the POST request**
-// how do I toggle the state of the HTML element based on the subscription status**
-// if the person unsubscribes should we take away the items that are greater than 5
-// or leave them there and say they have to subscribe to add more items**
-// make sure shadow is not showing for the logo when we hover over it**
-// error image and textbox shows up on top of the scroll bar how do we make it go
-// below or is it ok there**
-// is speech box ok where image is for error or how should we move it**
-// data not showing up in mongoDB when I add data to the watchlist**
-// are we allowed to use alert for the clipboard (go over function for it)**
-// should we still have conditonal if no items are in the list for copy
-// to clipboard if the button only shows up when items are added to the list
-// and already takes care of it**
-// is the delete ok for showing errors if we double tap to delete one item**
-// is UI ok or is it too similar to domo maker**
-// errors are ok in the console if something cannot be done right**
-// warning in console about each child in a list should have a unique "key" prop
-// when the application starts and when I initially add items to the list**
-// are error messages ok for when text is less and the text showing up towards the top of the textbox**
-// is the button color ok for copying to clipboard and add to list because of the background for
-// copy list to clipboard**
-// should image go after or before the delete button**
+// deleting, copying to clipboard, profit model, and storing files (check with functions)(and socket)****
+// make subscribe a react component****
+// how do make subacribe a react component would we just change the maker.JSX and app.handlebars and server
+// side is ok****
+// talk about how to use socket in project****
+// update the watchlist for a rating for socket(good, bad, ok, excellent, etc.)****
+// can storing files be used for honors requirement instead of socket (use socket)**
+// errors are ok in the console if something cannot be done right (delete the console.log() statements)**
+// should image go after or before the delete button (take away images)**
 // how to handle adding an image and having a default image if nothing is put in for watchlist instead
 // of profiles**
 // is logic ok for only handling titlename and status why does it say 
 // all fields required when I want to make adding an image optional otherwise 
 // put the popcorn image if nothing is selected for an image (would the logic be in 
 // handleList for the image for each item in the list)**
-// is transition of border color ok for hovering over items**
-// how to route 404 page and I only have one 404 error is that ok**
 // add image button also adds items to the list why**
-// when we subscribe and logout we are still subscribed and it still says we are subscribed
-// in the database and we are allowed to add 
-// items but the text for the button does not get saved why**
+// for Account passwords must be stored using a password-safe form of encryption
+// (such as bcrypt) is that the hashing function we made for passwords (for changing and creating password only)**
 
 // have uploading photo for the list be optional otherwise show a default image
 // for when we add an item to the list instead of changing profile photo or both**
-// does mongoDB make each collection plural by default (list (item) and account in models.js)**
+// does mongoDB make each collection plural by default (list (item) and account in models.js)****
 // I had a domo and list colection and deleted them in the database so are they deleted in general
-// or how do we know when they are deleted from all accounts in general**
-// get password change functionality working as well as subscription functionality working**
+// or how do we know when they are deleted from all accounts in general****
 // do we have to comment this file or no**
-// delete functionality not working anymore**
-// when we are in the database and we delete an account but are still logged in it we are
-// allowed to add items to the list and it saves in the database is that ok**
-// but when we log out we cannot access the account anymore but the items are still in the database**
-// is the way list items saves ok (all data is combined in the database
-// but each account displays it separately based on the account)**
-// do we have to have functionality if the password change is the same as current password**
-// make nav bar responive (is the responsiveness ok)**
+// do we have to have functionality if the password change is the same as current password (yes)****
 // make sure there is no domo in final submission**
-// should I make watchlist vertical or horizontal (looks similar to domo maker)**
-// can I just change background color instead of making the bottom area a
-// flexbox since the above 2 areas are a flexbox already and the color will not get affected
-// for those two areas**
 
 // app.js styling (get each list item information to show on the left side
 // and make room for image upload or default image on the right in flexbox), 

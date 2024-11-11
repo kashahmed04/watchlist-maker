@@ -28,11 +28,12 @@ const router = (app) => {
   app.delete('/deleteItem/:id', mid.requiresLogin, controllers.List.deleteListItem);
 
   app.get('/getUserInfo', mid.requiresLogin, controllers.Account.getUserInfo);
+  app.get('/getSubscribed', mid.requiresLogin, controllers.Account.getSubscribed);
 
   //is this ok or should there be any middleware and how do I know which function to route
-  //to since a 404 error can happen anywhere**
+  //to since a 404 error can happen anywhere****
   //go over 404 routing and how to test (here and in list.js in controllers)**
-  app.get('/*', controllers.List.renderErrorPage);
+  app.get('/*', mid.requiresSecure, controllers.List.renderErrorPage);
 };
 
 module.exports = router;

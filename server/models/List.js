@@ -13,7 +13,7 @@ const ListSchema = new mongoose.Schema({
     set: setName,
   },
   // do we still need this in the schema even though the dropdown already
-  // is a string (have it setup in maker.JSX and list.js in controllers)**
+  // is a string (have it setup in maker.JSX and list.js in controllers)****
   status: {
     type: String,
     required: true,

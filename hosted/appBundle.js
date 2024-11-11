@@ -33614,9 +33614,7 @@ const ListForm = props => {
     value: "Watching"
   }, "Watching"), /*#__PURE__*/React.createElement("option", {
     value: "Want to watch"
-  }, "Want to Watch")), /*#__PURE__*/React.createElement("button", {
-    id: "addImage"
-  }, "Add Image"), /*#__PURE__*/React.createElement("input", {
+  }, "Want to Watch")), /*#__PURE__*/React.createElement("input", {
     className: "makeItemSubmit",
     type: "submit",
     value: "Add to List"
@@ -33668,17 +33666,13 @@ const WatchlistData = props => {
   }
   const itemNodes = items.map(item => {
     return /*#__PURE__*/React.createElement("div", {
-      key: item.id,
+      key: item._id,
       className: "item"
     }, /*#__PURE__*/React.createElement("h3", {
       className: "titleName"
     }, "Title: ", item.title), /*#__PURE__*/React.createElement("h4", {
       className: "titleStatus"
-    }, "Status: ", item.status), /*#__PURE__*/React.createElement("img", {
-      id: "defaultImage",
-      src: "/assets/img/popcorn.png",
-      alt: "popcorn"
-    }), /*#__PURE__*/React.createElement("button", {
+    }, "Status: ", item.status), /*#__PURE__*/React.createElement("button", {
       onClick: () => handleDelete(item._id),
       id: "deleteButton"
     }, "Delete"));
@@ -33690,11 +33684,14 @@ const WatchlistData = props => {
     id: "copyList"
   }, "Copy List to Clipboard"), /*#__PURE__*/React.createElement("div", null, itemNodes));
 };
+
+//go over****
 const handlePasswordChange = e => {
   e.preventDefault();
   helper.hideError();
   const pass = e.target.querySelector('#pass').value;
   const pass2 = e.target.querySelector('#pass2').value;
+  const oldPass = e.target.querySelector('#oldPass').value;
   if (!pass || !pass2) {
     helper.handleError('All fields are required!');
     return false;
@@ -33703,9 +33700,14 @@ const handlePasswordChange = e => {
     helper.handleError('Passwords do not match!');
     return false;
   }
+  if (pass === oldPass) {
+    helper.handleError('New password cant be current password!');
+    return false;
+  }
   helper.sendPost(e.target.action, {
     pass,
-    pass2
+    pass2,
+    oldPass
   });
   return false;
 };
@@ -33720,19 +33722,26 @@ const ChangePasswordWindow = props => {
     method: "POST",
     className: "changeForm"
   }, /*#__PURE__*/React.createElement("label", {
+    htmlFor: "oldPass"
+  }, "Old Password: "), /*#__PURE__*/React.createElement("input", {
+    id: "oldPass",
+    type: "password",
+    name: "oldPass",
+    placeholder: "Password"
+  }), /*#__PURE__*/React.createElement("label", {
     htmlFor: "pass"
-  }, "Password: "), /*#__PURE__*/React.createElement("input", {
+  }, "New Password: "), /*#__PURE__*/React.createElement("input", {
     id: "pass",
     type: "password",
     name: "pass",
     placeholder: "Password"
   }), /*#__PURE__*/React.createElement("label", {
     htmlFor: "pass"
-  }, "Retype Password: "), /*#__PURE__*/React.createElement("input", {
+  }, "Retype New Password: "), /*#__PURE__*/React.createElement("input", {
     id: "pass2",
     type: "password",
     name: "pass2",
-    placeholder: "Retype password"
+    placeholder: "Retype Password"
   }), /*#__PURE__*/React.createElement("input", {
     className: "formSubmit",
     type: "submit",
@@ -33750,7 +33759,7 @@ const handleSubscribe = async e => {
       const subscribeButton = document.getElementById('subscribe');
       subscribeButton.innerHTML = result.subscribed ? 'Unsubscribe' : 'Subscribe';
     }
-  }); // Await the sendPost result
+  });
 };
 const App = () => {
   const [reloadItems, setReloadItems] = useState(false);
@@ -33774,6 +33783,14 @@ const init = () => {
     e.preventDefault();
     root.render(/*#__PURE__*/React.createElement(ChangePasswordWindow, null));
     return false;
+  });
+  fetch('/getSubscribed').then(res => {
+    res.json().then(result => {
+      if (typeof result.subscribed === 'boolean') {
+        const subscribeButton = document.getElementById('subscribe');
+        subscribeButton.innerText = result.subscribed ? 'Unsubscribe' : 'Subscribe';
+      }
+    });
   });
   ChangeSubscribeButton.addEventListener('click', handleSubscribe);
 

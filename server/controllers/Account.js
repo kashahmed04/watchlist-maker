@@ -77,10 +77,13 @@ const signup = async (req, res) => {
 // the new password and save it. After, we redirect the user to
 // the login page to login with their new password. If there is an
 // error we return the error.
+// go over****
 const changePassword = async (req, res) => {
   const pass = `${req.body.pass}`;
 
   const pass2 = `${req.body.pass2}`;
+
+  const oldPassword = `${req.body.oldPa}`;
 
   if (!pass || !pass2) {
     return res.status(400).json({ error: 'All fields are required!' });
@@ -90,23 +93,28 @@ const changePassword = async (req, res) => {
     return res.status(400).json({ error: 'Passwords do not match!' });
   }
 
-  try {
+  Account.authenticate(oldPassword, pass, (err, account)  => {
+    if (err || !account) {
+      return res.status(401).json({ error: 'New password cant be current password!' });
+    }
+
+    Account.generateHash(pass).then(async (password) => {
+      await Account.findByIdAndUpdate(req.session.account._id, { password });
+  
+      console.log('password change successful');
+    
+      return res.json({ redirect: '/logout' });
+    });
+      // await user.save();
+   
+
+  });
+  
     // find and update the user's password
     // const user = await Account.findOne({ _id: req.session.account._id });
-    const password = await Account.generateHash(pass);
-    // await user.save();
-    await Account.findByIdAndUpdate(req.session.account._id, { password });
-
-    console.log('password change successful');
-
-    return res.json({ redirect: '/logout' });
+  
     // is this ok instead of returning the status and the return statement**
-    // how does this work if we do not destroy the session**
     // return logout(req, res);
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json({ error: 'An error occurred while changing password!' });
-  }
 };
 
 // We find the users account based on the id and change the
@@ -126,20 +134,33 @@ const subscribe = async (req, res) => {
     // we do this after we save the data right to get the latest changes**
     req.session.account = Account.toAPI(user);
 
-    return res.status(200).json({ message: 'Subscription changed successfully.', subscribed: user.isSubscribed });
+    return res.status(200).json({ message: 'Subscription changed successfully!', subscribed: user.isSubscribed });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ error: 'Failed to change subscription status.' });
+    return res.status(500).json({ error: 'Failed to change subscription status!' });
   }
 };
 
-// is this ok to get user info. to show their username**
+const getSubscribed = async (req,res) => {
+  try{
+    const acc = await Account.findById(req.session.account._id);
+    if(!acc) {
+      return res.json({subscribed: false});
+    }
+
+    return res.json({subscribed: acc.isSubscribed});
+  } catch(err) {
+    console.log(err);
+    return res.json({subscribed: false});
+  }
+}
+// is this ok to get user info. to show their username****
 const getUserInfo = (req, res) => {
   if (req.session.account) {
     const { username } = req.session.account;
     res.json({ username });
   } else {
-    res.status(401).json({ error: 'User not logged in' });
+    res.status(401).json({ error: 'User not logged in!' });
   }
 };
 
@@ -151,5 +172,6 @@ module.exports = {
   signup,
   changePassword,
   subscribe,
+  getSubscribed,
   getUserInfo,
 };

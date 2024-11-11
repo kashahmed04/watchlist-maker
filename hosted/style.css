@@ -19,7 +19,6 @@ html, body {
 
 #logo:hover { 
     transform: scale(1.05); /* Scale the logo slightly */ 
-    opacity: 0.8; /* Slightly reduce opacity */
     background-color: transparent;
 }
 
@@ -71,7 +70,7 @@ nav:nth-child(1) {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 440px;
+    height: 400px;
     width: 100%;
     margin-top:0px;
     padding-top:10px;
@@ -196,7 +195,6 @@ nav:nth-child(1) {
 }
 
 #errorImage {
-    z-index: 225;
     margin-top: -20px;
     margin-left: 100px;
     height: 450px;
@@ -327,7 +325,6 @@ h3.emptyList {
     box-shadow: none;
 }
 
-/*is it ok to specify the form submit here or just say .formsubmit**/
 #loginForm input.formSubmit, #signupForm input.formSubmit, #changeForm input.formSubmit, #deleteButton {
     margin-top: 20px; /* Space above submit button */
     background: #66acee;
@@ -352,7 +349,7 @@ h3.emptyList {
     box-shadow: 0.05em 0.05em;
 }
 
-#user, #pass, #pass2{
+#user, #pass, #pass2, #oldPass{
     background-color: #ffcc5f;
     font-family: "Fredoka", serif; 
     color: #66acee;

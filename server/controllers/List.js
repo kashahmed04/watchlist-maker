@@ -25,7 +25,7 @@ const getList = async (req, res) => {
 };
 
 // would we handle title here and dropdown or can dropdown be in the HTML
-// as required and we only handle title here**
+// as required and we only handle title here****
 // Make sure all the fields are filled in, create the new item, save it into the database,
 // and return a success status. If there is an error we return the error.
 // cheeck in the database and if someone goes to make a list entry then check if they are subscribed
@@ -74,14 +74,15 @@ const deleteListItem = async (req, res) => {
     const item = await List.findOne({ _id: id, owner: userId });
 
     if (!item) {
-      //is this ok for 404**
-      return res.status(404).json({ redirect: '/404Error' });
+      //is this ok for 404 since we made it like this in router**
+      //I only have one 404 error is that ok**
+      return res.status(404).json({ message: 'Item does not exist!' });
     }
 
     await List.findByIdAndDelete(id);
-    return res.status(200).json({ message: 'Item deleted successfully' });
+    return res.status(200).json({ message: 'Item deleted successfully!' });
   } catch (error) {
-    return res.status(500).json({ message: 'Error deleting the item' });
+    return res.status(500).json({ message: 'Error deleting the item!' });
   }
 };
 

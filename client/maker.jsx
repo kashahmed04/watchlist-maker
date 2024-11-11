@@ -54,7 +54,6 @@ const ListForm = (props) => {
                 <option value="Watching">Watching</option> 
                 <option value="Want to watch">Want to Watch</option>
             </select>
-            <button id="addImage">Add Image</button>
             <input className="makeItemSubmit" type="submit" value="Add to List" />
         </form>
         </div>
@@ -111,10 +110,9 @@ const WatchlistData = (props) => {
     }
     const itemNodes = items.map(item => {
         return(
-            <div key={item.id} className="item">
+            <div key={item._id} className="item">
                 <h3 className="titleName">Title: {item.title}</h3>
                 <h4 className="titleStatus">Status: {item.status}</h4>
-                <img id="defaultImage" src="/assets/img/popcorn.png" alt="popcorn"/>
                 <button onClick={() => handleDelete(item._id)} id="deleteButton">Delete</button>
             </div>
         );
@@ -129,13 +127,14 @@ const WatchlistData = (props) => {
    );
 };
 
+ //go over****
 const handlePasswordChange = (e) => {
     e.preventDefault();
     helper.hideError();
 
     const pass = e.target.querySelector('#pass').value;
     const pass2 = e.target.querySelector('#pass2').value;
-
+    const oldPass = e.target.querySelector('#oldPass').value;
 
     if(!pass || !pass2){
         helper.handleError('All fields are required!');
@@ -147,7 +146,12 @@ const handlePasswordChange = (e) => {
         return false;
     }
 
-    helper.sendPost(e.target.action, {pass, pass2});
+    if(pass === oldPass){
+        helper.handleError('New password cant be current password!');
+        return false;
+    }
+
+    helper.sendPost(e.target.action, {pass, pass2, oldPass});
 
     return false;
 }
@@ -162,10 +166,12 @@ const ChangePasswordWindow = (props) => {
                 method="POST"
                 className="changeForm"
             >
-                <label htmlFor="pass">Password: </label>
+                <label htmlFor="oldPass">Old Password: </label>
+                <input id="oldPass" type="password" name="oldPass" placeholder="Password" />
+                <label htmlFor="pass">New Password: </label>
                 <input id="pass" type="password" name="pass" placeholder="Password" />
-                <label htmlFor="pass">Retype Password: </label>
-                <input id="pass2" type="password" name="pass2" placeholder="Retype password" />
+                <label htmlFor="pass">Retype New Password: </label>
+                <input id="pass2" type="password" name="pass2" placeholder="Retype Password" />
                 <input className="formSubmit" type="submit" value="Change Password" />
 
             </form>
@@ -177,13 +183,14 @@ const ChangePasswordWindow = (props) => {
 const handleSubscribe = async (e) => {
     e.preventDefault(); // Prevent default anchor behavior
     helper.hideError(); // Hide any previous error messages
-    
+
+
     helper.sendPost('/subscribe', {}, (result) => {
         if(typeof result.subscribed === 'boolean'){
             const subscribeButton = document.getElementById('subscribe');
             subscribeButton.innerHTML = result.subscribed ? 'Unsubscribe' : 'Subscribe';
         }
-    }); // Await the sendPost result
+    }); 
 };
 
 const App = () => {
@@ -216,6 +223,16 @@ const init = () => {
         return false;
     });
 
+    fetch('/getSubscribed').then(res => {
+        res.json().then(result => {
+            if(typeof result.subscribed === 'boolean'){
+                const subscribeButton = document.getElementById('subscribe');
+                subscribeButton.innerText = result.subscribed ? 'Unsubscribe' : 'Subscribe';
+            }
+        });
+    });
+
+    
     ChangeSubscribeButton.addEventListener('click', handleSubscribe);
 
     //() => {helper.sendPost('/subscribe', {})}
