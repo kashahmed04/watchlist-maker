@@ -77,7 +77,6 @@ const signup = async (req, res) => {
 // the new password and save it. After, we redirect the user to
 // the login page to login with their new password. If there is an
 // error we return the error.
-// go over****
 const changePassword = async (req, res) => {
   const pass = `${req.body.pass}`;
 
@@ -105,16 +104,10 @@ const changePassword = async (req, res) => {
     
       return res.json({ redirect: '/logout' });
     });
-      // await user.save();
    
 
   });
   
-    // find and update the user's password
-    // const user = await Account.findOne({ _id: req.session.account._id });
-  
-    // is this ok instead of returning the status and the return statement**
-    // return logout(req, res);
 };
 
 // We find the users account based on the id and change the
@@ -124,14 +117,11 @@ const changePassword = async (req, res) => {
 const subscribe = async (req, res) => {
   try {
     const user = await Account.findById(req.session.account._id);
-    // do we have to put this in the model for an account**
+
     user.isSubscribed = !user.isSubscribed;
 
     await user.save();
 
-    // access the users information by doing req.session.account.isSubscribed right**
-    // store the users isSubscribed in here right (don't we do toAPI in signup and login though)**
-    // we do this after we save the data right to get the latest changes**
     req.session.account = Account.toAPI(user);
 
     return res.status(200).json({ message: 'Subscription changed successfully!', subscribed: user.isSubscribed });

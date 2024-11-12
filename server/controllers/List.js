@@ -1,13 +1,11 @@
 const models = require('../models');
 
-// is this ok to name this variable List or no since List is a datatype as well**
 // Get List.js from the models folder.
 const { List } = models;
 
 // Go to the main page.
 const makerPage = (req, res) => res.render('app');
 
-//is this ok for 404**
 const renderErrorPage = (req, res) => res.render('error');
 
 //is it ok to put this in List.js because this routes in both pages**
@@ -27,14 +25,13 @@ const getList = async (req, res) => {
   }
 };
 
-// would we handle title here and dropdown or can dropdown be in the HTML
-// as required and we only handle title here****
+// is it ok to check if status and rating exist here and in maker.JSX in ListForm even though they have 
+// default values****
 // Make sure all the fields are filled in, create the new item, save it into the database,
 // and return a success status. If there is an error we return the error.
 // cheeck in the database and if someone goes to make a list entry then check if they are subscribed
 // and if not do they have 5 items, if so then reject them adding the item
 const makeList = async (req, res) => {
-  //should I still do check for status and rating even though there is a default value****
   if (!req.body.title || !req.body.status || !req.body.rating) {
     return res.status(400).json({ error: 'Title, status, and rating are required!' });
   }
@@ -79,8 +76,6 @@ const deleteListItem = async (req, res) => {
     const item = await List.findOne({ _id: id, owner: userId });
 
     if (!item) {
-      //is this ok for 404 since we made it like this in router**
-      //I only have one 404 error is that ok**
       return res.status(404).json({ message: 'Item does not exist!' });
     }
 

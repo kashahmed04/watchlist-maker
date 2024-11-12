@@ -1,45 +1,28 @@
 // can dynamic react components be adding,
-// deleting, copying to clipboard, profit model, and storing files (check with functions)(and socket)****
-// can storing files be used for honors requirement instead of socket (use socket)**
-// errors are ok in the console if something cannot be done right (delete the console.log() statements)**
-// should image go after or before the delete button (take away images)**
-// how to handle adding an image and having a default image if nothing is put in for watchlist instead
-// of profiles**
-// is logic ok for only handling titlename and status why does it say 
-// all fields required when I want to make adding an image optional otherwise 
-// put the popcorn image if nothing is selected for an image (would the logic be in 
-// handleList for the image for each item in the list)**
-// add image button also adds items to the list why**
+// deleting, copying to clipboard, profit model, and ratings (check if they are components that would count for project)****
+// can unit testing be used for honors requirement and what tests could we do (how much)****
+// errors are ok in the console if something cannot be done right (delete the console.log() statements)****
 // for Account passwords must be stored using a password-safe form of encryption
-// (such as bcrypt) is that the hashing function we made for passwords (for changing and creating password only)**
+// (such as bcrypt) is that the hashing function we made for passwords (for changing and creating password only)****
 
-// even though we have url encoded on the bottom if we do not use it the endpoint is JSON right****
-// is handlebars file ok for documentation****
-// we just need the router points for documentation right****
+// even though we have url encoded on the bottom if we do not use it the endpoint is JSON 
+// for documentation right****
+// we just need the router endpoints for documentation right****
 // check documenation****
 // GET requests handles HEAD requests too so we can just say GET, HEAD for documentation for GET requests
 // right****
-// do we need requires secure for every path or just login and signup****
-// the last function does not count as middleware so we do not add it to our documentaiton right
+// do we need requires secure for every path or just login,signup,/, and /* (check routes)****
+// the last function does not count as middleware so we do not add it to our documentaiton endpoints right
 // for router****
 // is a react component basically an element we put into a comonpent in the JSX files and use or does it have to be in a 
-// separate component to count for the project****
-
-// have uploading photo for the list be optional otherwise show a default image
-// for when we add an item to the list instead of changing profile photo or both**
+// separate component to count for the project (5 separate components)****
 // does mongoDB make each collection plural by default (list (item) and account in models.js)****
-// I had a domo and list colection and deleted them in the database so are they deleted in general
+// I had a domo and list collection and deleted them in the database so are they deleted in general
 // or how do we know when they are deleted from all accounts in general****
-// do we have to comment this file or no**
-// make sure there is no domo in final submission**
+// do we have to comment this file or no****
 
-// app.js styling (get each list item information to show on the left side
-// and make room for image upload or default image on the right in flexbox), 
-// 404 page (only)**, separate CSS file for 404 page (HTML page or handlebars)**,
-// uploading files for images functionality (how to make sure they only upload an image
-// not another file instead)**
-// style 404 page and make sure it works with routes in router.js and list.js
-// in controllers**
+// make sure there is no domo in final submission****
+
 require('dotenv').config();
 
 const path = require('path');

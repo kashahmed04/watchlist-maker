@@ -25,7 +25,7 @@ const requiresSecure = (req, res, next) => {
   return next();
 };
 
-// Bypass the HTTPS requirement when we are using localhost.**
+// Bypass the HTTPS requirement when we are using localhost.
 const bypassSecure = (req, res, next) => {
   next();
 };

@@ -31,8 +31,6 @@ const router = (app) => {
 
   app.get('/getUserInfo', mid.requiresLogin, controllers.Account.getUserInfo);
   app.get('/getSubscribed', mid.requiresLogin, controllers.Account.getSubscribed);
-  
-  app.get('/documentation', mid.requiresSecure, controllers.List.documentationPage);
 
   //is this ok or should there be any middleware and how do I know which function to route
   //to since a 404 error can happen anywhere****

@@ -33564,8 +33564,6 @@ const ListForm = props => {
   const [username, setUsername] = useState('');
   const [rating, setRating] = useState('Excellent');
 
-  //do we have to check for rating here if we already do server side in List.js and we have a default value
-  //so it will never be empty****
   //how to target a radio button value****
   const handleList = (e, onItemAdded) => {
     e.preventDefault();
@@ -33628,25 +33626,33 @@ const ListForm = props => {
     value: "Want to watch"
   }, "Want to Watch")), /*#__PURE__*/React.createElement("div", {
     id: "ratingOptions"
-  }, /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "ratings"
+  }, /*#__PURE__*/React.createElement("input", {
     type: "radio",
     name: "rating",
     value: "Good",
     checked: rating === 'Good',
     onChange: e => setRating(e.target.value)
-  }), "Good"), /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
+  }), "Good"), /*#__PURE__*/React.createElement("label", {
+    className: "ratings"
+  }, /*#__PURE__*/React.createElement("input", {
     type: "radio",
     name: "rating",
     value: "Bad",
     checked: rating === 'Bad',
     onChange: e => setRating(e.target.value)
-  }), "Bad"), /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
+  }), "Bad"), /*#__PURE__*/React.createElement("label", {
+    className: "ratings"
+  }, /*#__PURE__*/React.createElement("input", {
     type: "radio",
     name: "rating",
     value: "OK",
     checked: rating === 'OK',
     onChange: e => setRating(e.target.value)
-  }), "OK"), /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
+  }), "OK"), /*#__PURE__*/React.createElement("label", {
+    className: "ratings"
+  }, /*#__PURE__*/React.createElement("input", {
     type: "radio",
     name: "rating",
     value: "Excellent",
@@ -33676,8 +33682,6 @@ const WatchlistData = props => {
     });
   };
 
-  //are we allowed to use alert instead of console.log so the user
-  //can see the updates**
   //are we allows to have console.log() for errors or no**
   const copyToClipboard = async () => {
     if (items.length === 0) {
@@ -33724,9 +33728,6 @@ const WatchlistData = props => {
     id: "copyList"
   }, "Copy List to Clipboard"), /*#__PURE__*/React.createElement("div", null, itemNodes));
 };
-
-//go over***
-
 const ChangePasswordWindow = props => {
   const handlePasswordChange = e => {
     e.preventDefault();

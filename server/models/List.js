@@ -36,8 +36,9 @@ const ListSchema = new mongoose.Schema({
   },
 });
 
-// Do we need this here or can we delete it since we do not use it**
+// do we need this here or can we delete it since we do not use it**
 // we do not store owner or createdDate right**
+// can we keep this here if we want even if we do not use it**
 ListSchema.statics.toAPI = (doc) => ({
   title: doc.title,
   status: doc.status,

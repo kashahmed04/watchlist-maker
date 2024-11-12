@@ -69,7 +69,7 @@ nav:nth-child(1) {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 400px;
+    height: 430px;
     width: 100%;
     margin-top:0px;
     padding-top:10px;
@@ -271,8 +271,17 @@ h3.emptyList {
 }
 
 #ratingOptions{
-    color:black;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
 }
+
+label.ratings{
+    margin-left: 20px;
+    color: #F15B42;
+    font-family: "Fredoka", serif; 
+}
+
 
 /**styles for login/signup pages**/
 

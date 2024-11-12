@@ -12,8 +12,7 @@ const ListForm = (props) => {
 
     const [rating, setRating] = useState('Excellent');
 
-    //do we have to check for rating here if we already do server side in List.js and we have a default value
-    //so it will never be empty****
+  
     //how to target a radio button value****
     const handleList = (e, onItemAdded) => {
         e.preventDefault();
@@ -45,7 +44,7 @@ const ListForm = (props) => {
         fetchUsername();
     }, []);
 
-    return (
+    return(
         <div id="addItemsList">
         <form id="listForm"
             onSubmit={(e) => handleList(e, props.triggerReload)}
@@ -64,7 +63,7 @@ const ListForm = (props) => {
                 <option value="Want to watch">Want to Watch</option>
             </select>
             <div id="ratingOptions">
-                <label>
+                <label className="ratings">
                     <input 
                         type="radio"
                         name="rating"
@@ -74,7 +73,7 @@ const ListForm = (props) => {
                     />
                     Good
                 </label>
-                <label>
+                <label className="ratings">
                     <input 
                         type="radio"
                         name="rating"
@@ -84,7 +83,7 @@ const ListForm = (props) => {
                     />
                     Bad
                 </label>
-                <label>
+                <label className="ratings">
                     <input 
                         type="radio"
                         name="rating"
@@ -94,7 +93,7 @@ const ListForm = (props) => {
                     />
                     OK
                 </label>
-                <label>
+                <label className="ratings">
                     <input 
                         type="radio"
                         name="rating"
@@ -131,8 +130,6 @@ const WatchlistData = (props) => {
         });
     }
 
-   //are we allowed to use alert instead of console.log so the user
-   //can see the updates**
    //are we allows to have console.log() for errors or no**
     const copyToClipboard = async () => {
         if (items.length === 0) {
@@ -178,8 +175,6 @@ const WatchlistData = (props) => {
         </div>
    );
 };
-
- //go over***
 
 const ChangePasswordWindow = (props) => {
 
