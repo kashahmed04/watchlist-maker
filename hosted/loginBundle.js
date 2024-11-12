@@ -15,11 +15,17 @@ const handleError = message => {
 //is it ok for title to have numbers as well since some titles have numbers in it
 //and ony show error when the value is not filled in at all (blank)**
 
+// are the comments ok****
+
 //what is the default value of handler if we do not pass anything in (undefined)
 //when we pass the data into the server where does it go first (does it go to
 //router since we target the action)(goes to router)
 //since we made the method POST it knows to go to the POST version
 //of it since we made the method POST right (yes)
+
+// Passes data to the server side and waits for a response
+// back in order to guide the user to the correct result. Also,
+// potential errors are handled here.****
 const sendPost = async (url, data, handler) => {
   const response = await fetch(url, {
     method: 'POST',
@@ -42,6 +48,8 @@ const sendPost = async (url, data, handler) => {
     handler(result);
   }
 };
+
+// Sends a DELETE request and handles potential errors.
 const sendDelete = async (url, handler) => {
   const response = await fetch(url, {
     method: 'DELETE'
@@ -55,9 +63,13 @@ const sendDelete = async (url, handler) => {
     handler(result);
   }
 };
+
+// Hides the error message.
 const hideError = () => {
   document.getElementById('itemMessage').classList.add('hidden');
 };
+
+// Export the functions.
 module.exports = {
   handleError,
   sendPost,
@@ -33553,6 +33565,10 @@ const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const {
   createRoot
 } = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
+
+// are these comments ok****
+
+// Handles login.
 const handleLogin = e => {
   e.preventDefault();
   helper.hideError();
@@ -33568,6 +33584,8 @@ const handleLogin = e => {
   });
   return false;
 };
+
+// Handles signup.
 const handleSignup = e => {
   e.preventDefault();
   helper.hideError();
@@ -33589,6 +33607,8 @@ const handleSignup = e => {
   });
   return false;
 };
+
+// Handles login window.
 const LoginWindow = props => {
   return /*#__PURE__*/React.createElement("div", {
     className: "loginContainer"
@@ -33619,6 +33639,8 @@ const LoginWindow = props => {
     value: "Sign in"
   })));
 };
+
+// Handles signup window.
 const SignupWindow = props => {
   return /*#__PURE__*/React.createElement("div", {
     className: "signupContainer"
@@ -33656,6 +33678,9 @@ const SignupWindow = props => {
     value: "Sign up"
   })));
 };
+
+// Connect the components to the login handlebars file to load the specific
+// information. Make the login window show up first.****
 const init = () => {
   const loginButton = document.getElementById('loginButton');
   const signupButton = document.getElementById('signupButton');

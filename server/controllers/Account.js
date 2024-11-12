@@ -1,22 +1,20 @@
 const models = require('../models');
 
+// is it ok to be concise when commenting functions like this****
+
 // Get Account.js from the models folder.
 const { Account } = models;
+
+// Renders the login page.
 const loginPage = (req, res) => res.render('login');
 
-// If we want to logout destroy the session and go back to
-// the login page
+// Destroys the session and redirects to the login page.
 const logout = (req, res) => {
   req.session.destroy();
   res.redirect('/');
 };
 
-// Get the username and password fields we have passed in
-// and make sure they are both filled out. After, authenticate
-// the account to make sure the account exists and we are able
-// to login. If we can login, then we call the toAPI function
-// for the account to attach a unique id
-// then redirect the user to the /maker page.
+// Authenticates the user to login and redirects to /maker if successful, or returns an error.
 const login = (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;
@@ -34,11 +32,7 @@ const login = (req, res) => {
   });
 };
 
-// Make sure each field is filled in and the passwords
-// match, if they do, then hash the password and
-// make the new account and save it. After, we attach
-// a unique id then redirect the user to the /maker page.
-// If there is an error we send it back to the user.
+// Creates a new account, saves it, and redirects to /maker if successful, or returns an error.
 const signup = async (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;
@@ -72,11 +66,8 @@ const signup = async (req, res) => {
   }
 };
 
-// Check if both fields are passed in and they match,
-// then we find the users account based on the id and hash
-// the new password and save it. After, we redirect the user to
-// the login page to login with their new password. If there is an
-// error we return the error.
+// Changes the user's password if the new password is not the same as the old password,
+// and the passwords typed in match, then redirects to /logout.
 const changePassword = async (req, res) => {
   const pass = `${req.body.pass}`;
 
@@ -110,10 +101,7 @@ const changePassword = async (req, res) => {
   
 };
 
-// We find the users account based on the id and change the
-// state of their subscription based on the current state
-// and save the new state. After, we return the status if it
-// was successful, or an error message if there was an error.
+// Toggles the user's subscription status and saves it, then returns the new status.
 const subscribe = async (req, res) => {
   try {
     const user = await Account.findById(req.session.account._id);
@@ -131,6 +119,7 @@ const subscribe = async (req, res) => {
   }
 };
 
+// Returns the subscription status of the user.
 const getSubscribed = async (req,res) => {
   try{
     const acc = await Account.findById(req.session.account._id);
@@ -144,7 +133,9 @@ const getSubscribed = async (req,res) => {
     return res.json({subscribed: false});
   }
 }
+
 // is this ok to get user info. to show their username****
+// Returns the user's username if logged in.
 const getUserInfo = (req, res) => {
   if (req.session.account) {
     const { username } = req.session.account;

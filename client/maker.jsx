@@ -6,6 +6,12 @@ const { createRoot } = require('react-dom/client');
 
 //is radio buttons ok for the fifth react component** 
 
+// are the comments too short or are they ok****
+
+// Handles the form to add items to the watchlist. Includes
+// the title, status (as a dropdown), and rating (as radio buttons).
+// Also, handles displaying the username on the top of the form
+// to show who's watchlist it is.
 const ListForm = (props) => {
 
     const [username, setUsername] = useState('');
@@ -110,6 +116,8 @@ const ListForm = (props) => {
     );
 };
 
+// Handles displaying the users watchlist, copying to clipboard functionality,
+// and deleting a specific item functionality.
 const WatchlistData = (props) => {
     const [items, setList] = useState(props.items);
 
@@ -176,6 +184,7 @@ const WatchlistData = (props) => {
    );
 };
 
+// Handles a password change for the specific user.
 const ChangePasswordWindow = (props) => {
 
     const handlePasswordChange = (e) => {
@@ -227,7 +236,8 @@ const ChangePasswordWindow = (props) => {
         </div>
     );
 };
-// Function to handle subscriptio
+
+// Handles reloading the items when we edit the list****
 const App = () => {
     const [reloadItems, setReloadItems] = useState(false);
 
@@ -243,6 +253,7 @@ const App = () => {
     );
 };
 
+// Handles the subscribe functionality.
 const SubscribeButton = (props) => {
     const handleSubscribe = async (e) => {
         e.preventDefault(); 
@@ -261,6 +272,8 @@ const SubscribeButton = (props) => {
 };
 
 
+// Connect these components to the app handlebars files to show
+// specific information.****
 const init = () => {
 
     const root = createRoot(document.getElementById('app'));

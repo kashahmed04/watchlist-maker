@@ -15,11 +15,17 @@ const handleError = message => {
 //is it ok for title to have numbers as well since some titles have numbers in it
 //and ony show error when the value is not filled in at all (blank)**
 
+// are the comments ok****
+
 //what is the default value of handler if we do not pass anything in (undefined)
 //when we pass the data into the server where does it go first (does it go to
 //router since we target the action)(goes to router)
 //since we made the method POST it knows to go to the POST version
 //of it since we made the method POST right (yes)
+
+// Passes data to the server side and waits for a response
+// back in order to guide the user to the correct result. Also,
+// potential errors are handled here.****
 const sendPost = async (url, data, handler) => {
   const response = await fetch(url, {
     method: 'POST',
@@ -42,6 +48,8 @@ const sendPost = async (url, data, handler) => {
     handler(result);
   }
 };
+
+// Sends a DELETE request and handles potential errors.
 const sendDelete = async (url, handler) => {
   const response = await fetch(url, {
     method: 'DELETE'
@@ -55,9 +63,13 @@ const sendDelete = async (url, handler) => {
     handler(result);
   }
 };
+
+// Hides the error message.
 const hideError = () => {
   document.getElementById('itemMessage').classList.add('hidden');
 };
+
+// Export the functions.
 module.exports = {
   handleError,
   sendPost,
@@ -33560,6 +33572,12 @@ const {
 
 //is radio buttons ok for the fifth react component** 
 
+// are the comments too short or are they ok****
+
+// Handles the form to add items to the watchlist. Includes
+// the title, status (as a dropdown), and rating (as radio buttons).
+// Also, handles displaying the username on the top of the form
+// to show who's watchlist it is.
 const ListForm = props => {
   const [username, setUsername] = useState('');
   const [rating, setRating] = useState('Excellent');
@@ -33664,6 +33682,9 @@ const ListForm = props => {
     value: "Add to List"
   })));
 };
+
+// Handles displaying the users watchlist, copying to clipboard functionality,
+// and deleting a specific item functionality.
 const WatchlistData = props => {
   const [items, setList] = useState(props.items);
   useEffect(() => {
@@ -33728,6 +33749,8 @@ const WatchlistData = props => {
     id: "copyList"
   }, "Copy List to Clipboard"), /*#__PURE__*/React.createElement("div", null, itemNodes));
 };
+
+// Handles a password change for the specific user.
 const ChangePasswordWindow = props => {
   const handlePasswordChange = e => {
     e.preventDefault();
@@ -33790,7 +33813,8 @@ const ChangePasswordWindow = props => {
     value: "Change Password"
   })));
 };
-// Function to handle subscriptio
+
+// Handles reloading the items when we edit the list****
 const App = () => {
   const [reloadItems, setReloadItems] = useState(false);
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
@@ -33804,6 +33828,8 @@ const App = () => {
     reloadItems: reloadItems
   })));
 };
+
+// Handles the subscribe functionality.
 const SubscribeButton = props => {
   const handleSubscribe = async e => {
     e.preventDefault();
@@ -33823,6 +33849,9 @@ const SubscribeButton = props => {
     onClick: handleSubscribe
   }, "Subscribe"));
 };
+
+// Connect these components to the app handlebars files to show
+// specific information.****
 const init = () => {
   const root = createRoot(document.getElementById('app'));
   root.render(/*#__PURE__*/React.createElement(App, null));

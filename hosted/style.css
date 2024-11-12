@@ -18,7 +18,7 @@ html, body {
 }
 
 #logo:hover { 
-    transform: scale(1.05); /* Scale the logo slightly */ 
+    transform: scale(1.05);
     background-color: transparent;
 }
 
@@ -116,14 +116,14 @@ nav:nth-child(1) {
     font-family: "Fredoka", serif; 
     font-size: medium;     
     color: #F15B42;
-    background-color: transparent; /* Ensure no background color */
-    border: none; /* Remove default border */
-    border-bottom: 2px solid #F15B42; /* Add a bottom border for the line effect */
-    border-radius: 0; /* Ensure no rounded corners */
+    background-color: transparent; 
+    border: none; 
+    border-bottom: 2px solid #F15B42; 
+    border-radius: 0; 
     width: 180px;
-    outline: none; /* Remove outline on focus */
-    padding: 5px 0; /* Add some padding */
-    box-shadow: none; /* Remove any box shadow */
+    outline: none; 
+    padding: 5px 0; 
+    box-shadow: none; 
 }
 
 .makeItemSubmit, #copyList, #addImage {
@@ -234,8 +234,8 @@ nav:nth-child(1) {
 }
 
 #defaultImage{
-    width: 30%; /* Full width of the parent container */ 
-    height: auto; /* Maintain aspect ratio */
+    width: 30%; 
+    height: auto; 
 }
 
 .item:hover {
@@ -282,31 +282,26 @@ label.ratings{
     font-family: "Fredoka", serif; 
 }
 
-
-/**styles for login/signup pages**/
-
-/* Parent container with flex properties */
 .loginContainer, .signupContainer, .changeContainer {
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    height: 100vh; /* Full height of the viewport */
-    width: 100vw; /* Full width of the viewport */
-    background-color: #F15B42; /* Optional: Add background color */
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+    width: 100vw; 
+    background-color: #F15B42;
     color: #F15B42;
 }
 
-/* Styles for the login form */
 #loginForm, #signupForm, #changeForm {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Ensure content is centered within the form */
+    justify-content: center; 
     background-color: #ffcc5f;
     width: 30%;
-    padding: 20px; /* Add padding for spacing */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add box shadow for effect */
-    border-radius: 8px; /* Optional: Add border-radius for rounded corners */
+    padding: 20px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    border-radius: 8px; 
     border: solid 2px #66acee;
 }
 
@@ -324,10 +319,10 @@ label.ratings{
 }
 
 #loginForm input, #signupForm input, #changeForm input {
-    border: none; /* Remove default border */ 
-    border-bottom: 2px solid #F15B42; /* Add bottom border */
-    outline: none; /* Remove outline on focus */ 
-    padding: 5px 0; /* Add some padding */ 
+    border: none;
+    border-bottom: 2px solid #F15B42; 
+    outline: none;
+    padding: 5px 0;
     width: 50%;
     border-radius: 0;
 }
@@ -338,7 +333,7 @@ label.ratings{
 }
 
 #loginForm input.formSubmit, #signupForm input.formSubmit, #changeForm input.formSubmit, #deleteButton {
-    margin-top: 20px; /* Space above submit button */
+    margin-top: 20px; 
     background: #66acee;
     border: 3px solid #F15B42;
     border-radius: 0.4em;

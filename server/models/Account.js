@@ -5,6 +5,7 @@ const saltRounds = 10;
 
 let AccountModel = {};
 
+// Defines the schema for the account model.
 const AccountSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -28,15 +29,16 @@ const AccountSchema = new mongoose.Schema({
 });
 
 // we do not store password or createdDate in the toAPI right**
-// can we leave this here even though we do not use it****
 AccountSchema.statics.toAPI = (doc) => ({
   username: doc.username,
   _id: doc._id,
   isSubscribed: doc.isSubscribed,
 });
 
+// Generates a hashed password for the account.
 AccountSchema.statics.generateHash = (password) => bcrypt.hash(password, saltRounds);
 
+// Authenticates a user by comparing the password passed in with the stored hashed password.
 AccountSchema.statics.authenticate = async (username, password, callback) => {
   try {
     const doc = await AccountModel.findOne({ username }).exec();
@@ -53,11 +55,6 @@ AccountSchema.statics.authenticate = async (username, password, callback) => {
   }
 };
 
-// Toggle subscription status
-AccountSchema.methods.toggleSubscription = async function () {
-  this.isSubscribed = !this.isSubscribed;
-  await this.save();
-};
-
+// Create the model based on the schema.
 AccountModel = mongoose.model('Account', AccountSchema);
 module.exports = AccountModel;

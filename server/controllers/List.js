@@ -3,20 +3,19 @@ const models = require('../models');
 // Get List.js from the models folder.
 const { List } = models;
 
-// Go to the main page.
+// Renders the main page.
 const makerPage = (req, res) => res.render('app');
 
+// Renders the error page.
 const renderErrorPage = (req, res) => res.render('error');
-
-//is it ok to put this in List.js because this routes in both pages**
-const documentationPage = (req, res) => res.render('documentation');
 
 // Get the watchlist based on the users _id and return it. If there is an error
 // we return the error instead.
 const getList = async (req, res) => {
   try {
+    // still gets the rating without putting it here why****
     const query = { owner: req.session.account._id };
-    const docs = await List.find(query).select('title status').lean().exec();
+    const docs = await List.find(query).select('title status, rating').lean().exec();
 
     return res.json({ items: docs });
   } catch (err) {
@@ -27,10 +26,12 @@ const getList = async (req, res) => {
 
 // is it ok to check if status and rating exist here and in maker.JSX in ListForm even though they have 
 // default values****
+
 // Make sure all the fields are filled in, create the new item, save it into the database,
 // and return a success status. If there is an error we return the error.
-// cheeck in the database and if someone goes to make a list entry then check if they are subscribed
-// and if not do they have 5 items, if so then reject them adding the item
+// We also check if someone goes to make a list entry, and if they are subscribed
+// then allow them to add any number of items otherwise if they are not subscribed
+// then allow them to only add 5 items.
 const makeList = async (req, res) => {
   if (!req.body.title || !req.body.status || !req.body.rating) {
     return res.status(400).json({ error: 'Title, status, and rating are required!' });
@@ -64,8 +65,8 @@ const makeList = async (req, res) => {
   }
 };
 
-// Find the specific item and delete it based on the id.
-// If the item does not exist show the status and message
+// Find the specific item and delete it based on the _id.
+// If the item does not exist show the error status and message
 // and if there was an error during that process,
 // return the error.
 const deleteListItem = async (req, res) => {
@@ -90,7 +91,6 @@ const deleteListItem = async (req, res) => {
 module.exports = {
   makerPage,
   renderErrorPage,
-  documentationPage,
   getList,
   makeList,
   deleteListItem,
