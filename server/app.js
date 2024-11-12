@@ -22,6 +22,8 @@
 // do we need requires secure for every path or just login and signup****
 // the last function does not count as middleware so we do not add it to our documentaiton right
 // for router****
+// is a react component basically an element we put into a comonpent in the JSX files and use or does it have to be in a 
+// separate component to count for the project****
 
 // have uploading photo for the list be optional otherwise show a default image
 // for when we add an item to the list instead of changing profile photo or both**

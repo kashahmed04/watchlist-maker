@@ -4,24 +4,31 @@ const React = require('react');
 const { useState, useEffect } = React;
 const { createRoot } = require('react-dom/client');
 
+//is radio buttons ok for the fifth react component** 
 
 const ListForm = (props) => {
 
     const [username, setUsername] = useState('');
 
+    const [rating, setRating] = useState('Excellent');
+
+    //do we have to check for rating here if we already do server side in List.js and we have a default value
+    //so it will never be empty****
+    //how to target a radio button value****
     const handleList = (e, onItemAdded) => {
         e.preventDefault();
         helper.hideError();
     
         const title = e.target.querySelector('#titleName').value;
         const status = e.target.querySelector('#titleStatus').value
+        const rating = e.target.querySelector('input[name="rating"]:checked').value;
     
-        if(!title || !status){
+        if(!title || !status || !rating){
             helper.handleError('All fields are required!');
             return false;
         }
     
-        helper.sendPost(e.target.action, {title, status}, onItemAdded);
+        helper.sendPost(e.target.action, {title, status, rating}, onItemAdded);
         return false;
     
     };
@@ -56,6 +63,48 @@ const ListForm = (props) => {
                 <option value="Watching">Watching</option> 
                 <option value="Want to watch">Want to Watch</option>
             </select>
+            <div id="ratingOptions">
+                <label>
+                    <input 
+                        type="radio"
+                        name="rating"
+                        value="Good"
+                        checked={rating === 'Good'}
+                        onChange={(e) => setRating(e.target.value)}
+                    />
+                    Good
+                </label>
+                <label>
+                    <input 
+                        type="radio"
+                        name="rating"
+                        value="Bad"
+                        checked={rating === 'Bad'}
+                        onChange={(e) => setRating(e.target.value)}
+                    />
+                    Bad
+                </label>
+                <label>
+                    <input 
+                        type="radio"
+                        name="rating"
+                        value="OK"
+                        checked={rating === 'OK'}
+                        onChange={(e) => setRating(e.target.value)}
+                    />
+                    OK
+                </label>
+                <label>
+                    <input 
+                        type="radio"
+                        name="rating"
+                        value="Excellent"
+                        checked={rating === 'Excellent'}
+                        onChange={(e) => setRating(e.target.value)}
+                    />
+                    Excellent
+                </label>
+            </div>
             <input className="makeItemSubmit" type="submit" value="Add to List" />
         </form>
         </div>
@@ -91,7 +140,7 @@ const WatchlistData = (props) => {
             return; 
         }
 
-        const listText = items.map(item => `Title: ${item.title}, Status: ${item.status}`).join('\n');
+        const listText = items.map(item => `Title: ${item.title}, Status: ${item.status}, Rating: ${item.rating}`).join('\n');
 
         //we need a try catch since it's async right (we do not have it for some of our functions though)**
         try {
@@ -115,6 +164,7 @@ const WatchlistData = (props) => {
             <div key={item._id} className="item">
                 <h3 className="titleName">Title: {item.title}</h3>
                 <h4 className="titleStatus">Status: {item.status}</h4>
+                <p className="itemRating">Rating: {item.rating}</p>
                 <button onClick={() => handleDelete(item._id)} id="deleteButton">Delete</button>
             </div>
         );
@@ -231,7 +281,7 @@ const init = () => {
         root.render( <ChangePasswordWindow />);
         return false;
     });
-    
+
     fetch('/getSubscribed').then(res => {
         res.json().then(result => {
             if(typeof result.subscribed === 'boolean'){

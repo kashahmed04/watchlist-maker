@@ -34,8 +34,9 @@ const getList = async (req, res) => {
 // cheeck in the database and if someone goes to make a list entry then check if they are subscribed
 // and if not do they have 5 items, if so then reject them adding the item
 const makeList = async (req, res) => {
-  if (!req.body.title || !req.body.status) {
-    return res.status(400).json({ error: 'Title and status are required!' });
+  //should I still do check for status and rating even though there is a default value****
+  if (!req.body.title || !req.body.status || !req.body.rating) {
+    return res.status(400).json({ error: 'Title, status, and rating are required!' });
   }
 
   // 400 error if not enough space
@@ -48,13 +49,14 @@ const makeList = async (req, res) => {
   const listData = {
     title: req.body.title,
     status: req.body.status,
+    rating: req.body.rating,
     owner: req.session.account._id,
   };
 
   try {
     const newListItem = new List(listData);
     await newListItem.save();
-    return res.status(201).json({ title: newListItem.title, status: newListItem.status });
+    return res.status(201).json({ title: newListItem.title, status: newListItem.status, rating: newListItem.rating });
   } catch (err) {
     console.log(err);
     if (err.code === 11000) {

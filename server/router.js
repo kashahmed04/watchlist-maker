@@ -2,6 +2,8 @@ const controllers = require('./controllers');
 const mid = require('./middleware');
 
 // Add the pathnames for each request as well as the middleware we need to use.
+// do we need to put these routes in a specific order or is this ok****
+// same for documentation****
 const router = (app) => {
   app.get('/getList', mid.requiresLogin, controllers.List.getList);
   app.get('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);

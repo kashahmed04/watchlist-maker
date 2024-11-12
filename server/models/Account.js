@@ -28,6 +28,7 @@ const AccountSchema = new mongoose.Schema({
 });
 
 // we do not store password or createdDate in the toAPI right**
+// can we leave this here even though we do not use it****
 AccountSchema.statics.toAPI = (doc) => ({
   username: doc.username,
   _id: doc._id,

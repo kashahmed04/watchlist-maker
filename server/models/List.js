@@ -18,6 +18,13 @@ const ListSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  rating: {
+    type: String, 
+    required: true,
+    //is this ok even though we set up the values already in maker.JSX and a default value
+    //but we restrict them to these values here only****
+    enum: ['Excellent', 'Good', 'OK', 'Bad'],
+  },
   owner: {
     type: mongoose.Schema.ObjectId,
     required: true,
@@ -34,6 +41,7 @@ const ListSchema = new mongoose.Schema({
 ListSchema.statics.toAPI = (doc) => ({
   title: doc.title,
   status: doc.status,
+  rating: doc.rating,
 });
 
 // Create the model based on the schema.

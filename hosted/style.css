@@ -270,6 +270,10 @@ h3.emptyList {
     margin-bottom:10px;
 }
 
+#ratingOptions{
+    color:black;
+}
+
 /**styles for login/signup pages**/
 
 /* Parent container with flex properties */
