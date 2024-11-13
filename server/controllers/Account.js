@@ -134,7 +134,7 @@ const getSubscribed = async (req,res) => {
   }
 }
 
-// is this ok to get user info. to show their username****
+// is this ok to get user info. to show the username on the top of the maker form****
 // Returns the user's username if logged in.
 const getUserInfo = (req, res) => {
   if (req.session.account) {

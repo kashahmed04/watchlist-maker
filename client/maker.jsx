@@ -8,6 +8,31 @@ const { createRoot } = require('react-dom/client');
 
 // are the comments too short or are they ok****
 
+const Radial = (props) => {
+
+    if(!props.options) {
+        return(<div></div>);
+    }
+
+    const radialButtons = props.options.map(text => {
+        <label key={text} className="ratings">
+            <input 
+                type="radio"
+                name="rating"
+                value={text}
+                checked={props.selectedRating === text}
+                onChange={(e) => props.setRating(e.target.value)}
+            />
+            {text}
+        </label>
+    });
+
+    return (
+        <div>{radialButtons}</div>
+    );
+
+}
+
 // Handles the form to add items to the watchlist. Includes
 // the title, status (as a dropdown), and rating (as radio buttons).
 // Also, handles displaying the username on the top of the form
@@ -19,7 +44,11 @@ const ListForm = (props) => {
     const [rating, setRating] = useState('Excellent');
 
   
-    //how to target a radio button value****
+    //how to target a radio button value (is this ok)****
+    //have map functin to loop through options
+    //then pass in a function (setRating in the listForm) which
+    //is when someone selects a different option in the radio buttons
+    //
     const handleList = (e, onItemAdded) => {
         e.preventDefault();
         helper.hideError();
@@ -69,46 +98,13 @@ const ListForm = (props) => {
                 <option value="Want to watch">Want to Watch</option>
             </select>
             <div id="ratingOptions">
-                <label className="ratings">
-                    <input 
-                        type="radio"
-                        name="rating"
-                        value="Good"
-                        checked={rating === 'Good'}
-                        onChange={(e) => setRating(e.target.value)}
-                    />
-                    Good
-                </label>
-                <label className="ratings">
-                    <input 
-                        type="radio"
-                        name="rating"
-                        value="Bad"
-                        checked={rating === 'Bad'}
-                        onChange={(e) => setRating(e.target.value)}
-                    />
-                    Bad
-                </label>
-                <label className="ratings">
-                    <input 
-                        type="radio"
-                        name="rating"
-                        value="OK"
-                        checked={rating === 'OK'}
-                        onChange={(e) => setRating(e.target.value)}
-                    />
-                    OK
-                </label>
-                <label className="ratings">
-                    <input 
-                        type="radio"
-                        name="rating"
-                        value="Excellent"
-                        checked={rating === 'Excellent'}
-                        onChange={(e) => setRating(e.target.value)}
-                    />
-                    Excellent
-                </label>
+                <Radial 
+                
+                    options={['Good', 'Bad', 'OK', 'Excellent']} 
+                    selectedRating={rating}
+                    setRating={setRating}
+                />
+
             </div>
             <input className="makeItemSubmit" type="submit" value="Add to List" />
         </form>
@@ -167,8 +163,8 @@ const WatchlistData = (props) => {
     const itemNodes = items.map(item => {
         return(
             <div key={item._id} className="item">
-                <h3 className="titleName">Title: {item.title}</h3>
-                <h4 className="titleStatus">Status: {item.status}</h4>
+                <h4 className="titleName">Title: {item.title}</h4>
+                <h3 className="titleStatus">Status: {item.status}</h3>
                 <p className="itemRating">Rating: {item.rating}</p>
                 <button onClick={() => handleDelete(item._id)} id="deleteButton">Delete</button>
             </div>

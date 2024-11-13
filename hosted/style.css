@@ -157,7 +157,7 @@ nav:nth-child(1) {
     font-family: "Itim", cursive;
     font-weight: bold;
     font-size: large;
-    color: #ffcc5f
+    color: #ffcc5f;
 }
 
 .hidden {
@@ -280,6 +280,13 @@ label.ratings{
     margin-left: 20px;
     color: #F15B42;
     font-family: "Fredoka", serif; 
+}
+
+.itemRating {
+    font-family: "Itim", cursive;
+    font-weight: bold;
+    font-size: large;
+    color: #ffcc5f
 }
 
 .loginContainer, .signupContainer, .changeContainer {

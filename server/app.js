@@ -1,9 +1,18 @@
 // can dynamic react components be adding,
 // deleting, copying to clipboard, profit model, and ratings (check if they are components that would count for project)****
-// can unit testing be used for honors requirement and what tests could we do (how much)****
+// can unit testing be used for honors requirement and what tests could we do (how much) and what library are we using
+// and how do we put it into our project****
+// how to test if the unit tests work****
+// do we need heroku key for unit tests on heroku or is connection we make in app.js ok****
+// we can use unit testing the make sure the fields are the right datatype in addition to our server
+// testing that already right****
 // errors are ok in the console if something cannot be done right (delete the console.log() statements)****
 // for Account passwords must be stored using a password-safe form of encryption
 // (such as bcrypt) is that the hashing function we made for passwords (for changing and creating password only)****
+// how do I get the list items to show up as the most recent item added showing up at the top of the list rather than the 
+// bottom of the list****
+// rating works now but status does not (one works but not the other)****
+// is leaving styles page as styles.CSS from domo maker ok****
 
 // even though we have url encoded on the bottom if we do not use it the endpoint is JSON 
 // for documentation right****
@@ -22,6 +31,7 @@
 // do we have to comment this file or no****
 
 // make sure there is no domo in final submission****
+// make sure heroku connections are ok when we create the application****
 
 require('dotenv').config();
 
@@ -40,6 +50,7 @@ const redis = require('redis');
 const router = require('./router.js');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
+
 // how would I change this within heroku**
 const dbURI = process.env.MONGODB_URI || 'mongodb://127.0.0.1/WatchlistMaker';
 

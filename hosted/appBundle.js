@@ -35,7 +35,7 @@ const sendPost = async (url, data, handler) => {
     body: JSON.stringify(data)
   });
 
-  //everything returns JSON from the server right for return type****
+  //everything returns JSON from the server right for return type in documentation****
   const result = await response.json();
   document.getElementById('itemMessage').classList.add('hidden');
   if (result.redirect) {
@@ -33574,6 +33574,25 @@ const {
 
 // are the comments too short or are they ok****
 
+const Radial = props => {
+  if (!props.options) {
+    return /*#__PURE__*/React.createElement("div", null);
+  }
+  const radialButtons = props.options.map(text => {
+    /*#__PURE__*/React.createElement("label", {
+      key: text,
+      className: "ratings"
+    }, /*#__PURE__*/React.createElement("input", {
+      type: "radio",
+      name: "rating",
+      value: text,
+      checked: props.selectedRating === text,
+      onChange: e => props.setRating(e.target.value)
+    }), text);
+  });
+  return /*#__PURE__*/React.createElement("div", null, radialButtons);
+};
+
 // Handles the form to add items to the watchlist. Includes
 // the title, status (as a dropdown), and rating (as radio buttons).
 // Also, handles displaying the username on the top of the form
@@ -33582,7 +33601,11 @@ const ListForm = props => {
   const [username, setUsername] = useState('');
   const [rating, setRating] = useState('Excellent');
 
-  //how to target a radio button value****
+  //how to target a radio button value (is this ok)****
+  //have map functin to loop through options
+  //then pass in a function (setRating in the listForm) which
+  //is when someone selects a different option in the radio buttons
+  //
   const handleList = (e, onItemAdded) => {
     e.preventDefault();
     helper.hideError();
@@ -33644,39 +33667,11 @@ const ListForm = props => {
     value: "Want to watch"
   }, "Want to Watch")), /*#__PURE__*/React.createElement("div", {
     id: "ratingOptions"
-  }, /*#__PURE__*/React.createElement("label", {
-    className: "ratings"
-  }, /*#__PURE__*/React.createElement("input", {
-    type: "radio",
-    name: "rating",
-    value: "Good",
-    checked: rating === 'Good',
-    onChange: e => setRating(e.target.value)
-  }), "Good"), /*#__PURE__*/React.createElement("label", {
-    className: "ratings"
-  }, /*#__PURE__*/React.createElement("input", {
-    type: "radio",
-    name: "rating",
-    value: "Bad",
-    checked: rating === 'Bad',
-    onChange: e => setRating(e.target.value)
-  }), "Bad"), /*#__PURE__*/React.createElement("label", {
-    className: "ratings"
-  }, /*#__PURE__*/React.createElement("input", {
-    type: "radio",
-    name: "rating",
-    value: "OK",
-    checked: rating === 'OK',
-    onChange: e => setRating(e.target.value)
-  }), "OK"), /*#__PURE__*/React.createElement("label", {
-    className: "ratings"
-  }, /*#__PURE__*/React.createElement("input", {
-    type: "radio",
-    name: "rating",
-    value: "Excellent",
-    checked: rating === 'Excellent',
-    onChange: e => setRating(e.target.value)
-  }), "Excellent")), /*#__PURE__*/React.createElement("input", {
+  }, /*#__PURE__*/React.createElement(Radial, {
+    options: ['Good', 'Bad', 'OK', 'Excellent'],
+    selectedRating: rating,
+    setRating: setRating
+  })), /*#__PURE__*/React.createElement("input", {
     className: "makeItemSubmit",
     type: "submit",
     value: "Add to List"
@@ -33731,9 +33726,9 @@ const WatchlistData = props => {
     return /*#__PURE__*/React.createElement("div", {
       key: item._id,
       className: "item"
-    }, /*#__PURE__*/React.createElement("h3", {
+    }, /*#__PURE__*/React.createElement("h4", {
       className: "titleName"
-    }, "Title: ", item.title), /*#__PURE__*/React.createElement("h4", {
+    }, "Title: ", item.title), /*#__PURE__*/React.createElement("h3", {
       className: "titleStatus"
     }, "Status: ", item.status), /*#__PURE__*/React.createElement("p", {
       className: "itemRating"

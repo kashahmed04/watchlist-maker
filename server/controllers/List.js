@@ -1,5 +1,13 @@
 const models = require('../models');
 
+//write unit tests for if we tried to make a list item with these settings will we be able
+//to create the list 
+//make request and response mocks for express and search library to use them
+//make a fake request and response to mock it like we are using express
+//need to have enough of the request object for us to test our application
+//do end to end tests with github actions and mimic how a user would use the application
+//instead of github actions use circle.CI**
+
 // Get List.js from the models folder.
 const { List } = models;
 
@@ -15,7 +23,7 @@ const getList = async (req, res) => {
   try {
     // still gets the rating without putting it here why****
     const query = { owner: req.session.account._id };
-    const docs = await List.find(query).select('title status, rating').lean().exec();
+    const docs = await List.find(query).select('title status rating').sort({'createDate': 'descending'}).lean().exec();
 
     return res.json({ items: docs });
   } catch (err) {

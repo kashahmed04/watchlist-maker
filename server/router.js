@@ -1,7 +1,6 @@
 const controllers = require('./controllers');
 const mid = require('./middleware');
 
-// Add the pathnames for each request as well as the middleware we need to use.
 // do we need to put these routes in a specific order or is this ok****
 // same for documentation****
 
@@ -37,7 +36,6 @@ const router = (app) => {
 
   //is this ok or should there be any middleware and how do I know which function to route
   //to since a 404 error can happen anywhere****
-  //go over 404 routing and how to test (here and in list.js in controllers)**
   app.get('/*', mid.requiresSecure, controllers.List.renderErrorPage);
 };
 
