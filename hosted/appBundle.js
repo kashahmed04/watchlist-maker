@@ -33574,12 +33574,13 @@ const {
 
 // are the comments too short or are they ok****
 
+// Component for handling the radio buttons which does****
 const Radial = props => {
   if (!props.options) {
     return /*#__PURE__*/React.createElement("div", null);
   }
   const radialButtons = props.options.map(text => {
-    /*#__PURE__*/React.createElement("label", {
+    return /*#__PURE__*/React.createElement("label", {
       key: text,
       className: "ratings"
     }, /*#__PURE__*/React.createElement("input", {
@@ -33590,13 +33591,19 @@ const Radial = props => {
       onChange: e => props.setRating(e.target.value)
     }), text);
   });
-  return /*#__PURE__*/React.createElement("div", null, radialButtons);
+  return /*#__PURE__*/React.createElement("div", {
+    id: "ratingOptions"
+  }, radialButtons);
 };
 
 // Handles the form to add items to the watchlist. Includes
 // the title, status (as a dropdown), and rating (as radio buttons).
 // Also, handles displaying the username on the top of the form
 // to show who's watchlist it is.
+
+// this part in list form with radial creates the various radio buttons and 
+// changes the rating as we change it and the component 
+// is responsible for changing it as well or****
 const ListForm = props => {
   const [username, setUsername] = useState('');
   const [rating, setRating] = useState('Excellent');
@@ -33605,7 +33612,6 @@ const ListForm = props => {
   //have map functin to loop through options
   //then pass in a function (setRating in the listForm) which
   //is when someone selects a different option in the radio buttons
-  //
   const handleList = (e, onItemAdded) => {
     e.preventDefault();
     helper.hideError();
@@ -33665,9 +33671,7 @@ const ListForm = props => {
     value: "Watching"
   }, "Watching"), /*#__PURE__*/React.createElement("option", {
     value: "Want to watch"
-  }, "Want to Watch")), /*#__PURE__*/React.createElement("div", {
-    id: "ratingOptions"
-  }, /*#__PURE__*/React.createElement(Radial, {
+  }, "Want to Watch")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Radial, {
     options: ['Good', 'Bad', 'OK', 'Excellent'],
     selectedRating: rating,
     setRating: setRating
@@ -33847,6 +33851,7 @@ const SubscribeButton = props => {
 
 // Connect these components to the app handlebars files to show
 // specific information.****
+// do we have to do anything with radial buttons here or no****
 const init = () => {
   const root = createRoot(document.getElementById('app'));
   root.render(/*#__PURE__*/React.createElement(App, null));

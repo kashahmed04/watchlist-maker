@@ -8,6 +8,7 @@ const { createRoot } = require('react-dom/client');
 
 // are the comments too short or are they ok****
 
+// Component for handling the radio buttons which does****
 const Radial = (props) => {
 
     if(!props.options) {
@@ -15,20 +16,22 @@ const Radial = (props) => {
     }
 
     const radialButtons = props.options.map(text => {
-        <label key={text} className="ratings">
-            <input 
-                type="radio"
-                name="rating"
-                value={text}
-                checked={props.selectedRating === text}
-                onChange={(e) => props.setRating(e.target.value)}
-            />
-            {text}
-        </label>
+        return ( 
+            <label key={text} className="ratings">
+                <input 
+                    type="radio"
+                    name="rating"
+                    value={text}
+                    checked={props.selectedRating === text}
+                    onChange={(e) => props.setRating(e.target.value)}
+                />
+                {text}
+            </label>
+        )
     });
 
     return (
-        <div>{radialButtons}</div>
+        <div id="ratingOptions">{radialButtons}</div>
     );
 
 }
@@ -37,6 +40,10 @@ const Radial = (props) => {
 // the title, status (as a dropdown), and rating (as radio buttons).
 // Also, handles displaying the username on the top of the form
 // to show who's watchlist it is.
+
+// this part in list form with radial creates the various radio buttons and 
+// changes the rating as we change it and the component 
+// is responsible for changing it as well or****
 const ListForm = (props) => {
 
     const [username, setUsername] = useState('');
@@ -48,7 +55,6 @@ const ListForm = (props) => {
     //have map functin to loop through options
     //then pass in a function (setRating in the listForm) which
     //is when someone selects a different option in the radio buttons
-    //
     const handleList = (e, onItemAdded) => {
         e.preventDefault();
         helper.hideError();
@@ -97,7 +103,7 @@ const ListForm = (props) => {
                 <option value="Watching">Watching</option> 
                 <option value="Want to watch">Want to Watch</option>
             </select>
-            <div id="ratingOptions">
+            <div>
                 <Radial 
                 
                     options={['Good', 'Bad', 'OK', 'Excellent']} 
@@ -270,6 +276,7 @@ const SubscribeButton = (props) => {
 
 // Connect these components to the app handlebars files to show
 // specific information.****
+// do we have to do anything with radial buttons here or no****
 const init = () => {
 
     const root = createRoot(document.getElementById('app'));

@@ -1,5 +1,6 @@
-// can dynamic react components be adding,
-// deleting, copying to clipboard, profit model, and ratings (check if they are components that would count for project)****
+// can dynamic react components 
+// radio buttons, adding items, subscribe, displaying items on list, and app****
+// what is pages/views being dynamic mean****
 // can unit testing be used for honors requirement and what tests could we do (how much) and what library are we using
 // and how do we put it into our project****
 // how to test if the unit tests work****
@@ -23,8 +24,6 @@
 // do we need requires secure for every path or just login,signup,/, and /* (check routes)****
 // the last function does not count as middleware so we do not add it to our documentaiton endpoints right
 // for router****
-// is a react component basically an element we put into a comonpent in the JSX files and use or does it have to be in a 
-// separate component to count for the project (5 separate components)****
 // does mongoDB make each collection plural by default (list (item) and account in models.js)****
 // I had a domo and list collection and deleted them in the database so are they deleted in general
 // or how do we know when they are deleted from all accounts in general****
@@ -32,6 +31,9 @@
 
 // make sure there is no domo in final submission****
 // make sure heroku connections are ok when we create the application****
+// make sure end to end tests are connected to heroku****
+
+// do end to end tests and fix radial buttons****
 
 require('dotenv').config();
 
