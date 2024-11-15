@@ -3,8 +3,6 @@ const helper = require('./helper.js');
 const React = require('react');
 const {createRoot} = require('react-dom/client');
 
-// are these comments ok****
-
 // Handles login.
 const handleLogin = (e) => {
     e.preventDefault();
@@ -94,7 +92,7 @@ const SignupWindow = (props) => {
 };
 
 // Connect the components to the login handlebars file to load the specific
-// information. Make the login window show up first.****
+// information. Make the login window show up first.
 const init = () => {
 
     const loginButton = document.getElementById('loginButton');

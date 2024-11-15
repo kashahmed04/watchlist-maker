@@ -18,9 +18,10 @@ const AccountSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  // Default value is false for new accounts.
   isSubscribed: {
     type: Boolean,
-    default: false, // Default to false for new accounts
+    default: false,
   },
   createdDate: {
     type: Date,
@@ -28,7 +29,6 @@ const AccountSchema = new mongoose.Schema({
   },
 });
 
-// we do not store password or createdDate in the toAPI right**
 AccountSchema.statics.toAPI = (doc) => ({
   username: doc.username,
   _id: doc._id,

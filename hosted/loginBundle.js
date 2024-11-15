@@ -49,7 +49,7 @@ const sendPost = async (url, data, handler) => {
   }
 };
 
-// Sends a DELETE request and handles potential errors.
+// Sends a DELETE request to the server as well as handle potential errors.****
 const sendDelete = async (url, handler) => {
   const response = await fetch(url, {
     method: 'DELETE'
@@ -33566,8 +33566,6 @@ const {
   createRoot
 } = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
 
-// are these comments ok****
-
 // Handles login.
 const handleLogin = e => {
   e.preventDefault();
@@ -33680,7 +33678,7 @@ const SignupWindow = props => {
 };
 
 // Connect the components to the login handlebars file to load the specific
-// information. Make the login window show up first.****
+// information. Make the login window show up first.
 const init = () => {
   const loginButton = document.getElementById('loginButton');
   const signupButton = document.getElementById('signupButton');

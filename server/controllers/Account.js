@@ -1,7 +1,5 @@
 const models = require('../models');
 
-// is it ok to be concise when commenting functions like this****
-
 // Get Account.js from the models folder.
 const { Account } = models;
 
@@ -66,8 +64,9 @@ const signup = async (req, res) => {
   }
 };
 
-// Changes the user's password if the new password is not the same as the old password,
-// and the passwords typed in match, then redirects to /logout.
+// Changes the user's password if the new password is
+// not the same as the old password, and the passwords
+// typed in match, then redirects to /logout.
 const changePassword = async (req, res) => {
   const pass = `${req.body.pass}`;
 
@@ -83,22 +82,23 @@ const changePassword = async (req, res) => {
     return res.status(400).json({ error: 'Passwords do not match!' });
   }
 
-  Account.authenticate(req.session.account.username, oldPassword, (err, account)  => {
+  return Account.authenticate(req.session.account.username, oldPassword, (err, account) => {
     if (err || !account) {
+      return res.status(401).json({ error: 'Incorrect old password!' });
+    }
+
+    if (oldPassword === pass) {
       return res.status(401).json({ error: 'New password cant be current password!' });
     }
 
-    Account.generateHash(pass).then(async (password) => {
+    return Account.generateHash(pass).then(async (password) => {
       await Account.findByIdAndUpdate(req.session.account._id, { password });
-  
+
       console.log('password change successful');
-    
+
       return res.json({ redirect: '/logout' });
     });
-   
-
   });
-  
 };
 
 // Toggles the user's subscription status and saves it, then returns the new status.
@@ -119,22 +119,21 @@ const subscribe = async (req, res) => {
   }
 };
 
-// Returns the subscription status of the user.
-const getSubscribed = async (req,res) => {
-  try{
+// Returns the subscription status of the user based on the _id.
+const getSubscribed = async (req, res) => {
+  try {
     const acc = await Account.findById(req.session.account._id);
-    if(!acc) {
-      return res.json({subscribed: false});
+    if (!acc) {
+      return res.json({ subscribed: false });
     }
 
-    return res.json({subscribed: acc.isSubscribed});
-  } catch(err) {
+    return res.json({ subscribed: acc.isSubscribed });
+  } catch (err) {
     console.log(err);
-    return res.json({subscribed: false});
+    return res.json({ subscribed: false });
   }
-}
+};
 
-// is this ok to get user info. to show the username on the top of the maker form****
 // Returns the user's username if logged in.
 const getUserInfo = (req, res) => {
   if (req.session.account) {

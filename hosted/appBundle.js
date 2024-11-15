@@ -49,7 +49,7 @@ const sendPost = async (url, data, handler) => {
   }
 };
 
-// Sends a DELETE request and handles potential errors.
+// Sends a DELETE request to the server as well as handle potential errors.****
 const sendDelete = async (url, handler) => {
   const response = await fetch(url, {
     method: 'DELETE'
@@ -33570,11 +33570,10 @@ const {
   createRoot
 } = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
 
-//is radio buttons ok for the fifth react component** 
+// is radio buttons ok for the fifth react component** 
 
-// are the comments too short or are they ok****
-
-// Component for handling the radio buttons which does****
+// Component for handling the radio buttons which uses
+// the function from ListForm.
 const Radial = props => {
   if (!props.options) {
     return /*#__PURE__*/React.createElement("div", null);
@@ -33600,18 +33599,9 @@ const Radial = props => {
 // the title, status (as a dropdown), and rating (as radio buttons).
 // Also, handles displaying the username on the top of the form
 // to show who's watchlist it is.
-
-// this part in list form with radial creates the various radio buttons and 
-// changes the rating as we change it and the component 
-// is responsible for changing it as well or****
 const ListForm = props => {
   const [username, setUsername] = useState('');
   const [rating, setRating] = useState('Excellent');
-
-  //how to target a radio button value (is this ok)****
-  //have map functin to loop through options
-  //then pass in a function (setRating in the listForm) which
-  //is when someone selects a different option in the radio buttons
   const handleList = (e, onItemAdded) => {
     e.preventDefault();
     helper.hideError();
@@ -33702,15 +33692,13 @@ const WatchlistData = props => {
     });
   };
 
-  //are we allows to have console.log() for errors or no**
+  //are we allowed to have console.log() for errors or no**
   const copyToClipboard = async () => {
     if (items.length === 0) {
       alert("No List to copy!");
       return;
     }
     const listText = items.map(item => `Title: ${item.title}, Status: ${item.status}, Rating: ${item.rating}`).join('\n');
-
-    //we need a try catch since it's async right (we do not have it for some of our functions though)**
     try {
       await navigator.clipboard.writeText(listText);
       alert("Watchlist copied to clipboard!");
@@ -33813,7 +33801,7 @@ const ChangePasswordWindow = props => {
   })));
 };
 
-// Handles reloading the items when we edit the list****
+// Handles reloading the items when we edit the list.
 const App = () => {
   const [reloadItems, setReloadItems] = useState(false);
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
@@ -33850,8 +33838,7 @@ const SubscribeButton = props => {
 };
 
 // Connect these components to the app handlebars files to show
-// specific information.****
-// do we have to do anything with radial buttons here or no****
+// specific information.
 const init = () => {
   const root = createRoot(document.getElementById('app'));
   root.render(/*#__PURE__*/React.createElement(App, null));

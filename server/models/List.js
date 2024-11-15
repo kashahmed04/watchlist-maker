@@ -4,9 +4,6 @@ const _ = require('underscore');
 
 const setName = (title) => _.escape(title).trim();
 
-// is this ok for commenting as well or is it
-// ok to not comment the models****
-
 // Schema of what each list item will contain.
 const ListSchema = new mongoose.Schema({
   title: {
@@ -15,17 +12,13 @@ const ListSchema = new mongoose.Schema({
     trim: true,
     set: setName,
   },
-  // do we still need this in the schema even though the dropdown already
-  // is a string (have it setup in maker.JSX and list.js in controllers)****
   status: {
     type: String,
     required: true,
   },
   rating: {
-    type: String, 
+    type: String,
     required: true,
-    //is this ok even though we set up the values already in maker.JSX and a default value
-    //but we restrict them to these values here only****
     enum: ['Excellent', 'Good', 'OK', 'Bad'],
   },
   owner: {
@@ -39,10 +32,6 @@ const ListSchema = new mongoose.Schema({
   },
 });
 
-// do we need this here or can we delete it since we do not use it**
-// we do not store owner or createdDate right**
-// can we keep this here if we want even if we do not use it**
-// what does this do (allows us to access data in the server side easier or)****
 ListSchema.statics.toAPI = (doc) => ({
   title: doc.title,
   status: doc.status,
