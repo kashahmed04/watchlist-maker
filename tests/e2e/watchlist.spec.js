@@ -1,6 +1,9 @@
 
 import { test, expect } from '@playwright/test';
 
+// Note: You have to delete the user from the database to be able to test
+// again.
+// connect to mongoose then delete the user after everything is done****
 test.describe('Watchlist Application', () => {
   test('Sign up, subscribe, add an item to the watchlist, delete item, change password, and login/logout', async ({ page }) => {
 

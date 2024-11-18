@@ -21,7 +21,7 @@ const router = (app) => {
 
   app.post('/subscribe', mid.requiresLogin, controllers.Account.subscribe);
 
-  // The id is for determining which item to delete from the database.**
+  // The id is for determining which item to delete from the database.
   app.delete('/deleteItem/:id', mid.requiresLogin, controllers.List.deleteListItem);
 
   app.get('/getUserInfo', mid.requiresLogin, controllers.Account.getUserInfo);

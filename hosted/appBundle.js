@@ -12,15 +12,9 @@ const handleError = message => {
   document.getElementById('itemMessage').classList.remove('hidden');
 };
 
-//what is the default value of handler if we do not pass anything in (undefined)
-//when we pass the data into the server where does it go first (does it go to
-//router since we target the action)(goes to router)
-//since we made the method POST it knows to go to the POST version
-//of it since we made the method POST right (yes)
-
 // Passes data to the server side and waits for a response
 // back in order to guide the user to the correct result. Also,
-// potential errors are handled here.****
+// potential errors are handled here.
 const sendPost = async (url, data, handler) => {
   const response = await fetch(url, {
     method: 'POST',
@@ -42,7 +36,7 @@ const sendPost = async (url, data, handler) => {
   }
 };
 
-// Sends a DELETE request to the server as well as handle potential errors.****
+// Sends a DELETE request to the server as well as handle potential errors.
 const sendDelete = async (url, handler) => {
   const response = await fetch(url, {
     method: 'DELETE'
@@ -33563,8 +33557,6 @@ const {
   createRoot
 } = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
 
-// is radio buttons ok for the fifth react component** 
-
 // Component for handling the radio buttons which uses
 // the function from ListForm.
 const Radial = props => {
@@ -33684,8 +33676,6 @@ const WatchlistData = props => {
       }
     });
   };
-
-  //are we allowed to have console.log() for errors or no**
   const copyToClipboard = async () => {
     if (items.length === 0) {
       alert("No List to copy!");

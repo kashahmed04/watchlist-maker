@@ -34,7 +34,6 @@ const makeList = async (req, res) => {
     return res.status(400).json({ error: 'Title, status, and rating are required!' });
   }
 
-  // 400 error if not enough space
   const current = await List.find({ owner: req.session.account._id }).exec();
 
   if (!req.session.account.isSubscribed && current.length >= 5) {

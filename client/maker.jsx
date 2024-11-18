@@ -4,8 +4,6 @@ const React = require('react');
 const { useState, useEffect } = React;
 const { createRoot } = require('react-dom/client');
 
-// is radio buttons ok for the fifth react component** 
-
 // Component for handling the radio buttons which uses
 // the function from ListForm.
 const Radial = (props) => {
@@ -129,8 +127,7 @@ const WatchlistData = (props) => {
             }
         });
     }
-
-   //are we allowed to have console.log() for errors or no**
+    
     const copyToClipboard = async () => {
         if (items.length === 0) {
             alert("No List to copy!");

@@ -55,7 +55,6 @@ const signup = async (req, res) => {
 
     return res.json({ redirect: '/maker' });
   } catch (err) {
-    // should we remove console.log() from our code for submission**
     console.log(err);
     if (err.code === 11000) {
       return res.status(400).json({ error: 'Username already in use!' });
