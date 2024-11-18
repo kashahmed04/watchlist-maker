@@ -3,6 +3,7 @@
 // is that ok and we do not have to change anything right****
 // do we have to comment app.js****
 // are comments ok****
+// is playwright workflow ok based on article****
 
 require('dotenv').config();
 
