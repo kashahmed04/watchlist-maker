@@ -1,6 +1,8 @@
 // is it ok for fonts to show up like that for the playwright tests****
 // does changing the name in package.JSON do anything to the rest of the code or
-// is that ok and we do not have to change anything****
+// is that ok and we do not have to change anything right****
+// do we have to comment app.js****
+// are comments ok****
 
 require('dotenv').config();
 
