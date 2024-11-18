@@ -1,6 +1,6 @@
-// do end to end tests and fix in terminal and connect to github
-// and make sure user and data gets deleted from database
-// when we are done testing****
+// is it ok for fonts to show up like that for the playwright tests****
+// does changing the name in package.JSON do anything to the rest of the code or
+// is that ok and we do not have to change anything****
 
 require('dotenv').config();
 
