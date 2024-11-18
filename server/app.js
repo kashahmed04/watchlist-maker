@@ -21,6 +21,13 @@
 // made for passwords (for changing and creating password only)****
 // is leaving styles page as styles.CSS from domo maker ok****
 // can we submit checkpoint and final together****
+// why does my data not show up in the database after I added it
+// do I have to wait for it to be added (for items but accounts updates
+// automatically)****
+// we are allowed to have errors in the terminal and console if something
+// does not work (we throw the error ourselves when something does not work)****
+// is the delete button ok being an id****
+// check if heroku keys are ok on heroku and notepad****
 
 // we just need the router.js endpoints for documentation right****
 // check documenation****
@@ -36,9 +43,10 @@
 // or how do we know when they are deleted from all accounts in general****
 // do we have to comment this file or no****
 
-// make sure there is no domo in final submission****
+// make sure there is no domo in final submission (check with milestone)****
 // make sure heroku connections are ok when we create the application****
 // make sure end to end tests are connected to heroku****
+// get heroku connected to application with correct keys****
 
 // do end to end tests and fix radial buttons****
 

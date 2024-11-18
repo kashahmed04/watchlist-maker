@@ -12,7 +12,7 @@ const handleLogin = (e) => {
     const pass = e.target.querySelector('#pass').value;
 
     if(!username || !pass){
-        helper.handleError('Username or password is empty!');
+        helper.handleError('All fields required!');
         return false;
     }
     helper.sendPost(e.target.action, {username, pass});

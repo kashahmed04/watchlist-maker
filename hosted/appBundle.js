@@ -12,11 +12,6 @@ const handleError = message => {
   document.getElementById('itemMessage').classList.remove('hidden');
 };
 
-//is it ok for title to have numbers as well since some titles have numbers in it
-//and ony show error when the value is not filled in at all (blank)**
-
-// are the comments ok****
-
 //what is the default value of handler if we do not pass anything in (undefined)
 //when we pass the data into the server where does it go first (does it go to
 //router since we target the action)(goes to router)
@@ -34,8 +29,6 @@ const sendPost = async (url, data, handler) => {
     },
     body: JSON.stringify(data)
   });
-
-  //everything returns JSON from the server right for return type in documentation****
   const result = await response.json();
   document.getElementById('itemMessage').classList.add('hidden');
   if (result.redirect) {

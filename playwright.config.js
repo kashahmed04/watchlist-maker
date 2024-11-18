@@ -1,9 +1,10 @@
 
 // playwright.config.js
+// are comments ok in this file and watchlist.spec file****
 import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
-  timeout: 60000,
+  timeout: 5000,
   retries: 1,
   // Path to the E2E tests.
   testDir: 'tests/e2e', 
