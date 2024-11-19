@@ -28,7 +28,7 @@ export default defineConfig({
   // Number of retries for failed tests.
   retries: 1,    
 
-  testDir: path.join(import.meta.dirname, 'tests/e2e'),
+  testDir: path.join(__dirname, 'tests/e2e'),
 
   use: {
     headless: true, 

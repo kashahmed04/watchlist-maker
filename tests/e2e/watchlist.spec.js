@@ -2,7 +2,10 @@
 import { test, expect } from '@playwright/test';
 import mongoose from 'mongoose';
 import path from 'path';
-import models from path.resolve(import.meta.dirname, '../../server/models/index.js'); 
+import {dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+const __dirname = dirname(fileURLToPath(import.meta.url));
+import models from path.resolve(__dirname, '../../server/models/index.js'); 
 
 // Import the Account model.
 const { Account } = models; 
