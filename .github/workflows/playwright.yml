@@ -78,7 +78,7 @@ jobs:
     - name: Create Report Directory
       run: mkdir -p ${GITHUB_WORKSPACE}/tests/e2e/playwright-report
     - name: Run Playwright tests
-      run: npx playwright test tests/e2e/watchlist.spec.js
+      run: npx playwright test ${GITHUB_WORKSPACE}/tests/e2e/watchlist.spec.js
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
