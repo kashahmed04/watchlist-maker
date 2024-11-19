@@ -76,7 +76,7 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Create Report Directory
-      run: mkdir -p ${GITHUB_WORKSPACE}/tests/e2e/playwright-report
+      run: mkdir -p ${GITHUB_WORKSPACE}/tests/e2e/watchlist.spec.js
     - name: Run Playwright tests
       run: npx playwright test ${GITHUB_WORKSPACE}/tests/e2e/watchlist.spec.js
     - uses: actions/upload-artifact@v4

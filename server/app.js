@@ -1,4 +1,3 @@
-
 // is it ok for fonts to show up like that for the playwright tests****
 // does changing the name in package.JSON do anything to the rest of the code or
 // is that ok and we do not have to change anything right****
@@ -9,8 +8,9 @@
 // as we do the test****
 // get tests fixed for the pathname****
 // should I keep import or require statements for submission****
-// were there anywhere else where we referenced domo except for these files
+// was there anywhere else where we referenced domo except for these files
 // and the package.JSON****
+// is playwright ok for the external API requirement****
 
 require('dotenv').config();
 
