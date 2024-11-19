@@ -19,8 +19,8 @@
 //   ],
 // });
 
-import { defineConfig } from '@playwright/test';
-import path from 'path';
+const { defineConfig } = require('@playwright/test');
+const path = require('path');
 
 export default defineConfig({
   // Set the global timeout for tests.
