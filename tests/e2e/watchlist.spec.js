@@ -117,6 +117,13 @@ const { Account } = models;
 
 const dbURI = process.env.MONGODB_URI || 'mongodb://127.0.0.1/WatchlistMaker';
 
+mongoose.connect(dbURI).catch((err) => {
+  if (err) {
+    console.log('Could not connect to database');
+    throw err;
+  }
+});
+
 const TEST_USERNAME = 'test_user'; 
 
 test.describe('Watchlist Application', () => {

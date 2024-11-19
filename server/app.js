@@ -9,6 +9,8 @@
 // as we do the test****
 // get tests fixed for the pathname****
 // should I keep import or require statements for submission****
+// were there anywhere else where we referenced domo except for these files
+// and the package.JSON****
 
 require('dotenv').config();
 
