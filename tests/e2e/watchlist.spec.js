@@ -5,7 +5,7 @@ import path from 'path';
 import {dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
-import models from path.resolve(__dirname, '../../server/models/index.js'); 
+console.log(path.resolve(__dirname, '../../server/models/index.js'));
 
 // Import the Account model.
 const { Account } = models; 
