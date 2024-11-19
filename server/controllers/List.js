@@ -3,7 +3,7 @@ const models = require('../models');
 // Get List.js from the models folder.
 const { List } = models;
 
-// Renders the main page.
+// Renders the maker page.
 const makerPage = (req, res) => res.render('app');
 
 // Renders the error page.

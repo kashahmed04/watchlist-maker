@@ -36,7 +36,9 @@ const sendPost = async (url, data, handler) => {
   }
 };
 
-// Sends a DELETE request to the server as well as handle potential errors.
+// Sends a DELETE request to the server 
+// and waits for a response.Potential errors are
+// handled here as well.
 const sendDelete = async (url, handler) => {
   const response = await fetch(url, {
     method: 'DELETE'

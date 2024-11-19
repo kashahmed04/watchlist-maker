@@ -61,7 +61,8 @@ const signup = async (req, res) => {
 };
 
 // Changes the user's password if the new password is
-// not the same as the old password, and the passwords
+// not the same as the old password, the old password is 
+// the same as the current password, and the passwords
 // typed in match, then redirects to /logout.
 const changePassword = async (req, res) => {
   const pass = `${req.body.pass}`;

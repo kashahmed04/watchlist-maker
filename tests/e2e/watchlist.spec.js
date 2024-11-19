@@ -160,7 +160,7 @@ test.describe('Watchlist Application', () => {
     const subscriptionStatus = await page.locator('#subscribe');
     await expect(subscriptionStatus).toHaveText('Subscribe');
 
-    // Simulate clicking the subscribe button.
+    // Click the subscribe button.
     await page.click('#subscribe');
 
     // Verify that the subscription status changes.
