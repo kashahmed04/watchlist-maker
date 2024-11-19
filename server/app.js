@@ -7,6 +7,7 @@
 // is playwright workflow, tests, and github ok based on article****
 // are we also allowed to have test-results folder in the submission because it gets generated
 // as we do the test****
+// get tests fixed for the pathname****
 
 require('dotenv').config();
 

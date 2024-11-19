@@ -1,7 +1,8 @@
 
 import { test, expect } from '@playwright/test';
 import mongoose from 'mongoose';
-import models from '../../server/models/index.js'; 
+import path from 'path';
+import models from path.resolve(__dirname, '../../server/models/index.js'); 
 
 // Import the Account model.
 const { Account } = models; 
