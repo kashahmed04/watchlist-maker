@@ -66,7 +66,6 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    environment: project-2-watchlist-maker
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
@@ -78,6 +77,13 @@ jobs:
         echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env
         echo REDISCLOUD_URL=${{ secrets.REDISCLOUD_URL }} >> .env
         echo NODE_ENV=${{ secrets.NODE_ENV }} >> .env
+    - name: Debug Secrets
+      run: |
+        if [ -z "${{ secrets.MONGODB_URI }}" ]; then
+          echo "MONGODB_URI is undefined"
+        else
+          echo "MONGODB_URI is defined"
+        fi
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers
