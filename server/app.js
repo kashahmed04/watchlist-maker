@@ -34,6 +34,7 @@ const RedisStore = require('connect-redis').default;
 const redis = require('redis');
 const router = require('./router.js');
 
+const host = process.env.HOST || '0.0.0.0';
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 const dbURI = process.env.MONGODB_URI || 'mongodb://127.0.0.1/WatchlistMaker';
@@ -80,7 +81,7 @@ redisClient.connect().then(() => {
 
   router(app);
 
-  app.listen(port, (err) => {
+  app.listen(port, host, (err) => {
     if (err) {
       throw err;
     }
