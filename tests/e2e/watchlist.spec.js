@@ -197,7 +197,7 @@ test.describe('Watchlist Application', () => {
     // Fill in the change password form.
     await page.fill('#oldPass', 'pass');
     await page.fill('#pass', 'e');
-    await page.fill('#pass2', 'g');
+    await page.fill('#pass2', 'e');
     await page.click('.formSubmit');
 
     // Verify successful password change.
