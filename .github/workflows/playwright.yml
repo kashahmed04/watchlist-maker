@@ -71,6 +71,10 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
+      env:
+        MONGODB_URI: ${{ secrets.MONOGDB_URI }}
+        REDISCLOUD_URL: ${{ secrets.REDISCLOUD_URL }}
+        NODE_ENV: ${{ secrets.NODE_ENV }}
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers
