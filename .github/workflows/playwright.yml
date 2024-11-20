@@ -1,61 +1,3 @@
-# name: Playwright Tests
-# on:
-#   push:
-#     branches: [ main, master ]
-#   pull_request:
-#     branches: [ main, master ]
-# jobs:
-#   test:
-#     timeout-minutes: 60
-#     runs-on: ubuntu-latest
-#     steps:
-#     - uses: actions/checkout@v4
-#     - uses: actions/setup-node@v4
-#       with:
-#         node-version: lts/*
-#     - name: Install dependencies
-#       run: npm ci
-#     - name: Install Playwright Browsers
-#       run: npx playwright install --with-deps
-#     - name: Run Playwright tests
-#       run: npx playwright test tests/e2e # Adjusted path to match your structure
-#     - uses: actions/upload-artifact@v4
-#       if: ${{ !cancelled() }}
-#       with:
-#         name: playwright-report
-#         path: tests/e2e/playwright-report/ # Ensures the report matches your structure
-#         retention-days: 30
-
-# name: Playwright Tests
-# on:
-#   push:
-#     branches: [ main, master ]
-#   pull_request:
-#     branches: [ main, master ]
-# jobs:
-#   test:
-#     timeout-minutes: 60
-#     runs-on: ubuntu-latest
-#     steps:
-#     - uses: actions/checkout@v4
-#     - uses: actions/setup-node@v4
-#       with:
-#         node-version: lts/*
-#     - name: Install dependencies
-#       run: npm ci
-#     - name: Install Playwright Browsers
-#       run: npx playwright install --with-deps
-#     - name: Create Report Directory
-#       run: mkdir -p tests/e2e/playwright-report
-#     - name: Run Playwright tests
-#       run: npx playwright test tests/e2e # Adjust path 
-#     - uses: actions/upload-artifact@v4
-#       if: ${{ !cancelled() }}
-#       with:
-#         name: playwright-report
-#         path: tests/e2e/playwright-report/
-#         retention-days: 30
-
 name: Playwright Tests
 on:
   push:
@@ -66,6 +8,8 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.49.0-noble
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
@@ -74,9 +18,9 @@ jobs:
     - name: create env file
       run: |
         touch .env
-        echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env
-        echo REDISCLOUD_URL=${{ secrets.REDISCLOUD_URL }} >> .env
-        echo NODE_ENV=${{ secrets.NODE_ENV }} >> .env
+        echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" >> .env
+        echo "REDISCLOUD_URL=${{ secrets.REDISCLOUD_URL }}" >> .env
+        echo "NODE_ENV=${{ secrets.NODE_ENV }}" >> .env
     - name: Debug Secrets
       run: |
         if [ -z "${{ secrets.MONGODB_URI }}" ]; then
@@ -88,8 +32,6 @@ jobs:
       run: cat .env
     - name: Install dependencies
       run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
     - name: Create Report Directory
       run: mkdir -p ${GITHUB_WORKSPACE}/tests/e2e/playwright-report
     - name: Run Playwright tests
@@ -100,4 +42,3 @@ jobs:
         name: playwright-report
         path: ${GITHUB_WORKSPACE}/tests/e2e/playwright-report/
         retention-days: 30
-
