@@ -109,7 +109,7 @@
 const { test, expect } = require('@playwright/test');
 const mongoose = require('mongoose');
 const path = require('path');
-const models = path.resolve(__dirname, '../../server/models/index.js');
+const models = require('../../server/models/index.js');
 
 // Import the Account model.
 const { Account } = models; 
