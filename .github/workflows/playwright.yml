@@ -21,23 +21,18 @@ jobs:
         echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" >> .env
         echo "REDISCLOUD_URL=${{ secrets.REDISCLOUD_URL }}" >> .env
         echo "NODE_ENV=${{ secrets.NODE_ENV }}" >> .env
-    - name: Debug Secrets
-      run: |
-        if [ -z "${{ secrets.MONGODB_URI }}" ]; then
-          echo "MONGODB_URI is undefined"
-        else
-          echo "MONGODB_URI is defined"
-        fi
-    - name: Debug .env
-      run: cat .env
     - name: Install dependencies
       run: npm ci
     - name: Create Report Directory
       run: mkdir -p ${GITHUB_WORKSPACE}/tests/e2e/playwright-report
-    - name: Start Node Server
-      run: npm start
+    - name: Start Node Server in Background
+      run: npm start &
+    - name: Wait for Server to Start
+      run: sleep 10
     - name: Run Playwright tests
       run: npx playwright test ${GITHUB_WORKSPACE}/tests/e2e/watchlist.spec.js
+    - name: Stop Server
+      run: kill $(lsof -t -i:3000)
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
