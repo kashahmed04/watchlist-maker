@@ -126,6 +126,7 @@ const dbURI = process.env.MONGODB_URI;
 
 const TEST_USERNAME = 'test_user'; 
 
+
 test.describe('Watchlist Application', () => {
 
   // Connect to the database before running tests.
