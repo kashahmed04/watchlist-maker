@@ -115,6 +115,7 @@ const models = require('../../server/models/index.js');
 const { Account } = models; 
 
 const dbURI = process.env.MONGODB_URI || 'mongodb://127.0.0.1/WatchlistMaker';
+console.log(dbURI);
 
 // mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }).catch((err) => {
 //   if (err) {
