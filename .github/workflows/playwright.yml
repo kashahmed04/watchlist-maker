@@ -75,8 +75,9 @@ jobs:
       run: |
         touch .env
         echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env
-        echo REDISCLOUD_URL=${{ secrets.REDISCLOUD_URL }} >> .env
         echo NODE_ENV=${{ secrets.NODE_ENV }} >> .env
+    - name: debug env
+      run: cat .env
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers
