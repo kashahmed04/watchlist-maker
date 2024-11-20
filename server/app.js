@@ -1,22 +1,4 @@
-// is it ok for fonts to show up like that for the playwright tests****
-// does changing the name in package.JSON do anything to the rest of the code or
-// is that ok and we do not have to change anything right****
-// do we have to comment app.js****
-// are comments ok****
-// is playwright workflow, tests, and github ok based on article****
-// are we also allowed to have test-results folder in the submission because it gets generated
-// as we do the test****
-// get tests fixed for the pathname****
-// should I keep import or require statements for submission****
-// was there anywhere else where we referenced domo except for these files
-// and the package.JSON****
-// is playwright ok for the external API requirement
-// and how do we connect the config vars. to heroku****
-// tests are not deleting the user after tests with the new tests
-// but the user gets deleted with the old tests****
-// do we still need heroku keys and external API 
-// requirements if we test locally****
-// test does not delete the user after testing****
+
 
 require('dotenv').config();
 
