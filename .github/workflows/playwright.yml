@@ -78,18 +78,10 @@ jobs:
         echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env
         echo REDISCLOUD_URL=${{ secrets.REDISCLOUD_URL }} >> .env
         echo NODE_ENV=${{ secrets.NODE_ENV }} >> .env
-    - name: Cache Playwright Browsers
-      uses: actions/cache@v4
-      with:
-        path: ~/.cache/ms-playwright
-        key: playwright-browsers-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-        restore-keys: |
-          playwright-browsers-${{ runner.os }}-
     - name: Install dependencies
       run: npm ci
-    - name: Install Playwright Browsers (if not cached)
+    - name: Install Playwright Browsers
       run: npx playwright install --with-deps
-      if: steps.cache.outputs.cache-hit != 'true'
     - name: Create Report Directory
       run: mkdir -p ${GITHUB_WORKSPACE}/tests/e2e/playwright-report
     - name: Run Playwright tests
