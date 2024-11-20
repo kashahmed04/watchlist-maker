@@ -116,7 +116,6 @@ const models = require('../../server/models/index.js');
 const { Account } = models; 
 
 const dbURI = process.env.MONGODB_URI;
-console.log(dbURI);
 
 // mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }).catch((err) => {
 //   if (err) {
@@ -132,7 +131,7 @@ test.describe('Watchlist Application', () => {
   // Connect to the database before running tests.
   test.beforeAll(async () => {
     try {
-      await mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
+      await mongoose.connect(dbURI);
     } catch (error) {
       console.error('Failed to connect to the database:', error);
       throw error;
