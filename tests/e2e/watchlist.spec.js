@@ -110,19 +110,18 @@ const { test, expect } = require('@playwright/test');
 const mongoose = require('mongoose');
 const path = require('path');
 const models = path.resolve(__dirname, '../../server/models/index.js');
-console.log(models);
 
 // Import the Account model.
 const { Account } = models; 
 
 const dbURI = process.env.MONGODB_URI || 'mongodb://127.0.0.1/WatchlistMaker';
 
-mongoose.connect(dbURI).catch((err) => {
-  if (err) {
-    console.log('Could not connect to database');
-    throw err;
-  }
-});
+// mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }).catch((err) => {
+//   if (err) {
+//     console.log('Could not connect to database');
+//     throw err;
+//   }
+// });
 
 const TEST_USERNAME = 'test_user'; 
 

@@ -10,7 +10,13 @@
 // should I keep import or require statements for submission****
 // was there anywhere else where we referenced domo except for these files
 // and the package.JSON****
-// is playwright ok for the external API requirement****
+// is playwright ok for the external API requirement
+// and how do we connect the config vars. to heroku****
+// tests are not deleting the user after tests with the new tests
+// but the user gets deleted with the old tests****
+// do we still need heroku keys and external API 
+// requirements if we test locally****
+// test does not delete the user after testing****
 
 require('dotenv').config();
 
