@@ -30,7 +30,8 @@ const login = (req, res) => {
   });
 };
 
-// Creates a new account, saves it, and redirects to /maker if successful, or returns an error.
+// Creates a new account, saves it, and redirects to
+// /maker if successful, or returns an error.
 const signup = async (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;

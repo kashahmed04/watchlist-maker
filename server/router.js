@@ -2,7 +2,7 @@ const controllers = require('./controllers');
 const mid = require('./middleware');
 
 // Configures routes for different endpoints with middleware for security,
-// authentication, and error handling.
+// and authentication.
 const router = (app) => {
   app.get('/getList', mid.requiresLogin, controllers.List.getList);
   app.get('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
