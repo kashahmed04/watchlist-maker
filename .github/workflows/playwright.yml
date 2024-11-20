@@ -20,11 +20,10 @@ jobs:
         touch .env
         echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" >> .env
         echo "REDISCLOUD_URL=${{ secrets.REDISCLOUD_URL }}" >> .env
-        echo "NODE_ENV=${{ secrets.NODE_ENV }}" >> .env
     - name: Install dependencies
       run: npm ci
     - name: Start Node Server in Background
-      run: npm start > server.log 2>&1 &
+      run: npm start > server.log 2>&1 & echo $! > server.pid
     - name: Wait for Server to Start
       run: |
         for i in {1..30}; do
@@ -35,14 +34,10 @@ jobs:
           echo "Waiting for server to start..."
           sleep 1
         done
-    - name: Debug Server Logs
-      run: cat server.log
-    - name: Check Server Accessibility
-      run: curl -I http://localhost:3000/
     - name: Run Playwright tests
       run: npx playwright test
     - name: Stop Server
-      run: kill $(lsof -t -i:3000)
+      run: kill $(cat server.pid)
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
