@@ -65,16 +65,16 @@ on:
 jobs:
   test:
     timeout-minutes: 60
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest      
+    env:
+      MONGODB_URI: ${{ secrets.MONOGDB_URI }}
+      REDISCLOUD_URL: ${{ secrets.REDISCLOUD_URL }}
+      NODE_ENV: ${{ secrets.NODE_ENV }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
-      env:
-        MONGODB_URI: ${{ secrets.MONOGDB_URI }}
-        REDISCLOUD_URL: ${{ secrets.REDISCLOUD_URL }}
-        NODE_ENV: ${{ secrets.NODE_ENV }}
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers
