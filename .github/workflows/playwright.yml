@@ -84,6 +84,8 @@ jobs:
         else
           echo "MONGODB_URI is defined"
         fi
+    - name: Debug .env
+      run: cat .env
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers
