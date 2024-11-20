@@ -115,7 +115,7 @@ const models = require('../../server/models/index.js');
 // Import the Account model.
 const { Account } = models; 
 
-const dbURI = process.env.MONGODB_URI || 'mongodb://127.0.0.1/WatchlistMaker';
+const dbURI = process.env.MONGODB_URI;
 console.log(dbURI);
 
 // mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }).catch((err) => {
