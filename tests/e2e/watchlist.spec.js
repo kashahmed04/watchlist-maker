@@ -106,6 +106,7 @@
 // });
 
 
+require('dotenv').config();
 const { test, expect } = require('@playwright/test');
 const mongoose = require('mongoose');
 const path = require('path');
