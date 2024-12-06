@@ -94,7 +94,8 @@ const changePassword = async (req, res) => {
 
       console.log('password change successful');
 
-      return res.json({ redirect: '/logout' });
+      req.session.destroy();
+      return res.json({ redirect: '/' });
     });
   });
 };

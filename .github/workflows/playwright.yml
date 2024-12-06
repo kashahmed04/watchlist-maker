@@ -1,9 +1,12 @@
 name: Playwright Tests
+# On is when the workflow fires.
 on:
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+# Job times out after 5 minutes, uses playright docker for container
+# and uses the steps from github with node with the lts version.
 jobs:
   test:
     timeout-minutes: 5
@@ -15,6 +18,7 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
+    # Create the new env file and populate it with the secrets.
     - name: Create env file
       run: |
         touch .env
@@ -24,6 +28,8 @@ jobs:
       run: npm ci
     - name: Start Node Server in Background
       run: npm start > server.log 2>&1 & echo $! > server.pid
+    # Checks every second to see if server is up then waits a second then checks it again
+    # for 30 seconds until the server is up then passes or the task fails.
     - name: Wait for Server to Start
       run: |
         for i in {1..30}; do
@@ -34,6 +40,8 @@ jobs:
           echo "Waiting for server to start..."
           sleep 1
         done
+    # Once the server is up then we run our playwright tests then after the tests
+    # are done then we stop the server and kill it.
     - name: Run Playwright tests
       run: npx playwright test
     - name: Stop Server
