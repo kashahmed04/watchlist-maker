@@ -1,48 +1,81 @@
 name: Playwright Tests
-# On is when the workflow fires.
+
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
-    branches: [ main, master ]
-# Job times out after 5 minutes, uses playright docker for container
-# and uses the steps from github with node with the lts version.
+    branches: [main, master]
+
 jobs:
   test:
     timeout-minutes: 5
     runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright:v1.48.2-noble
+
+    services:
+      mongodb:
+        image: mongo:8
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --eval 'db.runCommand({ ping: 1 })'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis:7
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: lts/*
-    # Create the new env file and populate it with the secrets.
-    - name: Create env file
-      run: |
-        touch .env
-        echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" >> .env
-        echo "REDISCLOUD_URL=${{ secrets.REDISCLOUD_URL }}" >> .env
-    - name: Install dependencies
-      run: npm ci
-    - name: Start Node Server in Background
-      run: npm start > server.log 2>&1 & echo $! > server.pid
-    # Checks every second to see if server is up then waits a second then checks it again
-    # for 30 seconds until the server is up then passes or the task fails.
-    - name: Wait for Server to Start
-      run: |
-        for i in {1..30}; do
-          if nc -zv localhost 3000; then
-            echo "Server is up!"
-            break
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Create env file
+        run: |
+          touch .env
+          echo "MONGODB_URI=mongodb://localhost:27017/watchlist-maker" >> .env
+          echo "REDISCLOUD_URL=redis://localhost:6379" >> .env
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: Start Node Server in Background
+        run: npm start > server.log 2>&1 & echo $! > server.pid
+
+      - name: Wait for Server to Start
+        run: |
+          for i in {1..30}; do
+            if nc -z localhost 3000; then
+              echo "Server is up!"
+              exit 0
+            fi
+
+            echo "Waiting for server to start..."
+            sleep 1
+          done
+
+          echo "Server failed to start."
+          cat server.log
+          exit 1
+
+      - name: Run Playwright tests
+        run: npx playwright test
+
+      - name: Stop Server
+        if: always()
+        run: |
+          if [ -f server.pid ]; then
+            kill $(cat server.pid) || true
           fi
-          echo "Waiting for server to start..."
-          sleep 1
-        done
-    # Once the server is up then we run our playwright tests then after the tests
-    # are done then we stop the server and kill it.
-    - name: Run Playwright tests
-      run: npx playwright test
-    - name: Stop Server
-      run: kill $(cat server.pid)
